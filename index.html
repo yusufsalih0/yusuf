@@ -235,20 +235,6 @@
   .memory-delete-btn:hover {
     opacity: 1;
   }
-
-  /* YouTube oynatıcı kutusu */
-  #yt-player {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    width: 280px;
-    height: 158px; /* 16:9 oranı */
-    border-radius: 12px;
-    box-shadow: 0 0 15px #d95ca0;
-    background: black;
-    overflow: hidden;
-    z-index: 1000;
-  }
 </style>
 </head>
 <body>
@@ -258,7 +244,7 @@
   <h1>Doğum Günün Kutlu Olsun 🥳</h1>
   <p>İyi ki doğdun Besa.</p>
   <p class="small-poem">
-    “Bir gülüşün var, hayatıma bahar olur,<br>
+    “Bir gülüşün var, hayatıma bahar olur, <br>
     Her anın seninle anlam bulur, dostum olur.”
   </p>
   <button id="btn-to-page2">Devam Et</button>
@@ -303,11 +289,6 @@
   <button id="btn-to-page1" style="margin-top:2rem;">Geri Dön</button>
 </main>
 
-<!-- YouTube Player -->
-<div id="yt-player" class="hidden">
-  <iframe id="yt-iframe" width="280" height="158" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
 <script>
   // Kalp animasyonu
   for(let i=0; i<15; i++) {
@@ -334,84 +315,86 @@
     resetGame();
   });
 
-  // Şarkı listeleri (isim, youtube id)
+  // Şarkı listeleri
   const besaSongs = [
-    {name:"madrigal - seni dert etmeler", id:"Z9wA_NweA5c"},
-    {name:"madrigal - ellerimde çiçekler", id:"G4wTb5MjK_Y"},
-    {name:"madrigal - kelebekler", id:"pN9CYgYd1gk"},
-    {name:"son feci bisiklet - 80", id:"Km5ETLG9Nwo"},
-    {name:"son feci bisiklet - zaman yok", id:"dh_1LYfjfjE"},
-    {name:"son feci bisiklet - 6patlar", id:"hrF6LjvybfQ"},
-    {name:"adamlar - sarılırım birine", id:"RZb_7f7R49I"},
-    {name:"adamlar - rüyalarda buruşmuşum", id:"Q7y6ndSl1_0"},
-    {name:"adamlar - acının ilacı", id:"4Xb9HwY_9cg"},
-    {name:"pamela - istanbul", id:"q_X5xX1KhMI"},
-    {name:"sufle - pus", id:"jNeGx8v9Az0"},
-    {name:"kahraman deniz - son durağın", id:"UeZbQ69gEq4"},
-    {name:"kahraman deniz - böyle sever", id:"mwo_eN_2gEY"},
-    {name:"kalben - yara", id:"YrE_4jBqh6o"},
-    {name:"sertab erener - bi polar", id:"7_UEDWk3cwA"},
-    {name:"sertab erener - olsun", id:"0EVrUX4DzZQ"},
-    {name:"sezen aksu - biliyorsun", id:"7FfMg-JvPq8"},
-    {name:"dedubluman - sana güvenmiyorum", id:"yPuSmzYT6uY"},
-    {name:"ufuk beydemir - ay tenli kadın", id:"lTEZ2uPfZyI"},
-    {name:"mabel matiz - fırtınadayım", id:"xpAOliEuFtY"},
-    {name:"yüksek sadakat - fener", id:"u7LFw5hu0tA"},
-    {name:"duman - ah", id:"R3Hdnz8hWrg"},
-    {name:"duman - senden daha güzel", id:"Tz6jGr2RDNU"},
-    {name:"duman - aman aman", id:"a0Jb9CKr7Oc"},
-    {name:"duman - seni kendime sakladım", id:"0aMShH7M4r0"},
-    {name:"teoman - çoban yıldızı", id:"GshJ6PZ3M7Q"},
-    {name:"teoman - kupa kızı ve sinek valesi", id:"F3pxqV9kcLg"},
-    {name:"şebnem ferah - mayın tarlası", id:"mQXHJzDjAw4"},
-    {name:"şebnem ferah - yalnız", id:"U4EjC7DeQk0"},
-    {name:"model - mey", id:"yTN9PtHYR3A"},
-    {name:"yüzyüzeyken konuşuruz - sandal", id:"JsVH9DD-2Ds"},
-    {name:"sen varsın diye", id:"kq2aK1cpGv8"}
+    "madrigal - seni dert etmeler",
+    "madrigal - ellerimde çiçekler",
+    "madrigal - kelebekler",
+    "son feci bisiklet - 80",
+    "son feci bisiklet - zaman yok",
+    "son feci bisiklet - 6patlar",
+    "adamlar - sarılırım birine",
+    "adamlar - rüyalarda buruşmuşum",
+    "adamlar - acının ilacı",
+    "pamela - istanbul",
+    "sufle - pus",
+    "kahraman deniz - son durağın",
+    "kahraman deniz - böyle sever",
+    "kalben - yara",
+    "sertab erener - bi polar",
+    "sertab erener - olsun",
+    "sezen aksu - biliyorsun",
+    "dedubluman - sana güvenmiyorum",
+    "ufuk beydemir - ay tenli kadın",
+    "mabel matiz - fırtınadayım",
+    "yüksek sadakat - fener",
+    "duman - ah",
+    "duman - senden daha güzel",
+    "duman - aman aman",
+    "duman - seni kendime sakladım",
+    "teoman - çoban yıldızı",
+    "teoman - kupa kızı ve sinek valesi",
+    "şebnem ferah - mayın tarlası",
+    "şebnem ferah - yalnız",
+    "model - mey",
+    "yüzyüzeyken konuşuruz - sandal",
+    "sen varsın diye"
   ];
 
   const klasikSongs = [
-    {name:"eyedress - romantic lover", id:"AbwKjvOGz40"},
-    {name:"mild high club - homage", id:"8FFpeydP2cA"},
-    {name:"steve lacy - dark red", id:"5h9q5UY1Hrg"},
-    {name:"arctic monkeys - i wanna be yours", id:"OUQ1tqDbMfA"},
-    {name:"cigarettes after sex - apocalypse", id:"akN3l-Li-y0"},
-    {name:"cigarettes after sex - k.", id:"xD9mzBfJ-1Q"},
-    {name:"beach house - sex drugs etc.", id:"Rvp6IX5rAsM"},
-    {name:"little wolves - lost my mind", id:"zWqKz62KaYY"},
-    {name:"mac de marco - chamber of reflection", id:"0bGgXHQCEhQ"},
-    {name:"girl in red - we fell in love in october", id:"M90f1rhU4xQ"},
-    {name:"anathema - flying", id:"3zX9AgnX5Yw"},
-    {name:"cigarettes after sex - heavenly", id:"VE5CyYmROi0"},
-    {name:"guns n' roses - this i love", id:"_tXN8Jez_nI"},
-    {name:"arctic monkeys - 505", id:"qTq1i6jGxu0"},
-    {name:"yunus emre - imkansız bir aşk denir", id:"D8rJ1T-IyW0"},
-    {name:"avenged sevenfold - i won't see you tonight", id:"rKlqZV7Zg1k"}
+    "eyedress - romantic lover",
+    "mild high club - homage",
+    "steve lacy - dark red",
+    "arctic monkeys - i wanna be yours",
+    "cigarettes after sex - apocalypse",
+    "cigarettes after sex - k.",
+    "beach house - sex drugs etc.",
+    "little wolves - lost my mind",
+    "mac de marco - chamber of reflection",
+    "girl in red - we fell in love in october",
+    "anathema - flying",
+    "cigarettes after sex - heavenly",
+    "guns n' roses - this i love",
+    "arctic monkeys - 505",
+    "yunus emre - imkansız bir aşk denir",
+    "avenged sevenfold - i won't see you tonight"
   ];
 
   const yufusSongs = [
-    {name:"ezhel - imkansızsım", id:"8DjH6bKUPL8"},
-    {name:"ezhel - geceler", id:"ZRCU6TzMw9k"},
-    {name:"kayra - hikaye bitti çoktan", id:"lTshP5rsOaw"},
-    {name:"kayra - müneccim", id:"WpJhBqpyBqQ"},
-    {name:"kayra - kent orman müdavimleri", id:"XYRafO0UUCc"},
-    {name:"kayra - hayırsız evlat", id:"J0AXxZBq2Z8"},
-    {name:"kayra - merhumun çalıntı gölgesi", id:"m9k58XIl9RU"},
-    {name:"hidra - gibi", id:"GHeeExlxH-Y"},
-    {name:"hidra - karıncalar", id:"XvXHIms9EE0"},
-    {name:"kayra - bir günlük öldürün beni", id:"vH1Fc6azv5o"},
-    {name:"anıl piyancı - bugün biraz içtim", id:"4tNmU_VucwM"},
-    {name:"aspova - eskimiş senelere", id:"6HG5O8FFhxQ"},
-    {name:"allame - hayalin yeri yok", id:"PErKuDaW7xE"},
-    {name:"yener çevik - çocuk", id:"YuBnX2UjQuc"},
-    {name:"no 1 - böyle iyi", id:"a_YOoi9Z0B8"},
-    {name:"no 1 - olmasa da olur", id:"QuEZk92z5RQ"}
+    "ezhel - imkansızsım",
+    "ezhel - geceler",
+    "kayra - hikaye bitti çoktan",
+    "kayra - müneccim",
+    "kayra - kent orman müdavimleri",
+    "kayra - hayırsız evlat",
+    "kayra - merhumun çalıntı gölgesi",
+    "hidra - gibi",
+    "hidra - karıncalar",
+    "kayra - bir günlük öldürün beni",
+    "anıl piyancı - bugün biraz içtim",
+    "aspova - eskimiş senelere",
+    "allame - hayalin yeri yok",
+    "yener çevik - çocuk",
+    "no 1 - böyle iyi",
+    "no 1 - olmasa da olur"
   ];
 
+  // Mini oyun state
   let gameSongs = [];
   let round = 1;
   let totalRounds = 0;
 
+  // Elements
   const choice1 = document.getElementById('choice1');
   const choice2 = document.getElementById('choice2');
   const roundInfo = document.getElementById('round-info');
@@ -419,9 +402,22 @@
   const restartBtn = document.getElementById('restart-btn');
   const miniGameDiv = document.getElementById('mini-game');
   const gameTitle = document.getElementById('game-title');
-  const ytPlayerDiv = document.getElementById('yt-player');
-  const ytIframe = document.getElementById('yt-iframe');
 
+  // Başlangıçta mini oyun ve anı defteri gizli
+  miniGameDiv.classList.add('hidden');
+  const memorySection = document.getElementById('memory-section');
+  const toggleMemoryBtn = document.getElementById('toggle-memory-btn');
+  memorySection.classList.add('hidden');
+
+  // Kategori butonları
+  document.querySelectorAll('.btn-category').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-category');
+      startMiniGame(cat);
+    });
+  });
+
+  // Mini oyun başlat
   function startMiniGame(category) {
     switch(category) {
       case 'besa': gameSongs = [...besaSongs]; gameTitle.textContent = "💖 Besa'nın Favorileri"; break;
@@ -435,14 +431,12 @@
     restartBtn.classList.add('hidden');
     roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
     miniGameDiv.classList.remove('hidden');
-    ytPlayerDiv.classList.remove('hidden');
     showNextChoices();
-    playVideo(gameSongs[0].id);
   }
 
   function showNextChoices() {
     if (gameSongs.length === 1) {
-      winnerMessage.textContent = `Favori şarkın: "${gameSongs[0].name}" 🎉`;
+      winnerMessage.textContent = `Favori şarkın: "${gameSongs[0]}" 🎉`;
       choice1.style.display = 'none';
       choice2.style.display = 'none';
       roundInfo.textContent = '';
@@ -452,10 +446,8 @@
     choice1.style.display = 'block';
     choice2.style.display = 'block';
 
-    choice1.textContent = gameSongs[0].name;
-    choice2.textContent = gameSongs[1].name;
-    // Videoyu ilk seçenekle başlat
-    playVideo(gameSongs[0].id);
+    choice1.textContent = gameSongs[0];
+    choice2.textContent = gameSongs[1];
   }
 
   function chooseSong(chosenIndex) {
@@ -474,106 +466,4 @@
     showNextChoices();
   }
 
-  choice1.addEventListener('click', () => {
-    chooseSong(0);
-    playVideo(gameSongs[0].id);
-  });
-  choice2.addEventListener('click', () => {
-    chooseSong(1);
-    playVideo(gameSongs[0].id);
-  });
-
-  restartBtn.addEventListener('click', () => {
-    miniGameDiv.classList.add('hidden');
-    ytPlayerDiv.classList.add('hidden');
-  });
-
-  function resetGame() {
-    gameSongs = [];
-    round = 1;
-    totalRounds = 0;
-    winnerMessage.textContent = '';
-    restartBtn.classList.add('hidden');
-    miniGameDiv.classList.add('hidden');
-    ytPlayerDiv.classList.add('hidden');
-  }
-
-  // YouTube oynatıcıyı güncelle
-  function playVideo(videoId) {
-    if(!videoId) {
-      ytIframe.src = "";
-      ytPlayerDiv.classList.add('hidden');
-      return;
-    }
-    ytPlayerDiv.classList.remove('hidden');
-    ytIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1`;
-  }
-
-  // Anı defteri aç/kapa
-  const memorySection = document.getElementById('memory-section');
-  const toggleMemoryBtn = document.getElementById('toggle-memory-btn');
-  toggleMemoryBtn.addEventListener('click', () => {
-    memorySection.classList.toggle('hidden');
-  });
-
-  // Anı defteri kaydet
-  const saveMemoryBtn = document.getElementById('save-memory-btn');
-  const memoriesList = document.getElementById('memories-list');
-  const memoryText = document.getElementById('memory-text');
-  const memoryPhoto = document.getElementById('memory-photo');
-
-  let memories = JSON.parse(localStorage.getItem('memories') || '[]');
-  function saveMemoriesToStorage() {
-    localStorage.setItem('memories', JSON.stringify(memories));
-  }
-  function renderMemories() {
-    memoriesList.innerHTML = '';
-    memories.forEach((m, idx) => {
-      const div = document.createElement('div');
-      div.className = 'memory-item';
-      div.innerHTML = `<button class="memory-delete-btn" data-index="${idx}">✕</button><p>${m.text.replace(/\n/g, "<br>")}</p>`;
-      if(m.photo) {
-        const img = document.createElement('img');
-        img.src = m.photo;
-        div.appendChild(img);
-      }
-      memoriesList.appendChild(div);
-    });
-    // silme tuşu event
-    document.querySelectorAll('.memory-delete-btn').forEach(btn => {
-      btn.onclick = () => {
-        memories.splice(btn.getAttribute('data-index'), 1);
-        saveMemoriesToStorage();
-        renderMemories();
-      }
-    });
-  }
-  renderMemories();
-
-  saveMemoryBtn.onclick = () => {
-    const text = memoryText.value.trim();
-    if(!text) {
-      alert("Anı boş olamaz.");
-      return;
-    }
-    if(memoryPhoto.files.length > 0) {
-      const file = memoryPhoto.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        memories.push({text: text, photo: reader.result});
-        saveMemoriesToStorage();
-        renderMemories();
-        memoryText.value = "";
-        memoryPhoto.value = "";
-      }
-      reader.readAsDataURL(file);
-    } else {
-      memories.push({text: text, photo: null});
-      saveMemoriesToStorage();
-      renderMemories();
-      memoryText.value = "";
-    }
-  };
-</script>
-</body>
-</html>
+  choice1.addEventListener('click', () => chooseSong
