@@ -103,10 +103,29 @@
     max-width: 650px;
     margin: 0 auto;
   }
+
+  /* Kategori butonları */
+  #category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  #category-buttons button {
+    flex: 1;
+    min-width: 110px;
+    background: #ec4899;
+    box-shadow: 0 0 10px #ec4899;
+    font-size: 1.2rem;
+    padding: 0.8rem 1rem;
+  }
+
   ul.song-list {
     list-style: none;
     padding: 0;
     margin-top: 1rem;
+    max-height: 350px;
+    overflow-y: auto;
   }
   ul.song-list li {
     background: #f9a8d4;
@@ -167,11 +186,31 @@
     padding: 0.5rem 1rem;
     margin-bottom: 0.8rem;
     box-shadow: 0 0 10px #f9a8d4;
+    position: relative;
   }
   .memory-item img {
     max-width: 100%;
     border-radius: 10px;
     margin-top: 0.3rem;
+  }
+  .memory-delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: #ec4899;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-weight: bold;
+    color: black;
+    cursor: pointer;
+    box-shadow: 0 0 6px #ec4899;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+  .memory-delete-btn:hover {
+    opacity: 1;
   }
 </style>
 
@@ -191,8 +230,14 @@
 
 <!-- 2. Sayfa -->
 <main id="page2" class="hidden">
-  <h2>Besa'nın Favori Şarkıları 🎶</h2>
-  <p>Bu listeyi birlikte seçtik, en sevdiğin şarkı hangisi bakalım!</p>
+  <h2 id="page2-title">Şarkılar</h2>
+
+  <div id="category-buttons">
+    <button data-cat="besa">Besa'nın Favorileri</button>
+    <button data-cat="klasik">Klasikler</button>
+    <button data-cat="yufus">Yufus’un Sevdikleri</button>
+  </div>
+
   <ul class="song-list" id="song-list">
     <!-- Şarkılar JS ile buraya gelecek -->
   </ul>
@@ -235,7 +280,7 @@
     page1.classList.remove('hidden');
   });
 
-  // Besa'nın 32 favori şarkısı (listeden elenen 4 çıkarıldı)
+  // Şarkı listeleri (isimler)
   const besaSongs = [
     "1. madrigal - seni dert etmeler",
     "2. madrigal - ellerimde çiçekler",
@@ -271,11 +316,76 @@
     "32. sen varsın diye"
   ];
 
+  const klasikSongs = [
+    "1. eyedress - romantic lover",
+    "2. mild high club - homage",
+    "3. steve lacy - dark red",
+    "4. arctic monkeys - i wanna be yours",
+    "5. cigarettes after sex - apocalypse",
+    "6. cigarettes after sex - k.",
+    "7. beach house - sex drugs etc.",
+    "8. little wolves - lost my mind",
+    "9. mac demarco - chamber of reflection",
+    "10. girl in red - we fell in love in october",
+    "11. anathema - flying",
+    "12. cigarettes after sex - heavenly",
+    "13. guns n' roses - this i love",
+    "14. arctic monkeys - 505",
+    "15. yunus emre - imkansiz bir ask denir",
+    "16. avenged sevenfold - i won't see you tonight"
+  ];
+
+  const yufusSongs = [
+    "1. ezhel - imkansızım",
+    "2. ezhel - geceler",
+    "3. kayra - hikaye bitti çoktan",
+    "4. kayra - müneccim",
+    "5. kayra - kent orman müdavimleri",
+    "6. kayra - hayırsız evlat",
+    "7. kayra - merhumun çalıntı gölgesi",
+    "8. hidra - gibi",
+    "9. hidra - karıncalar",
+    "10. kayra - bir günlük öldürün beni",
+    "11. anıl piyancı - bugün biraz içtim",
+    "12. aspova - eskimiş senelere",
+    "13. allame - hayalin yeri yok",
+    "14. yener çevik - çocuk",
+    "15. no 1 - böyle iyi",
+    "16. no 1 - olmasa da olur"
+  ];
+
+  const songLists = {
+    besa: besaSongs,
+    klasik: klasikSongs,
+    yufus: yufusSongs
+  };
+
+  const categoryButtons = document.querySelectorAll('#category-buttons button');
   const songListElem = document.getElementById('song-list');
-  besaSongs.forEach(song => {
-    const li = document.createElement('li');
-    li.textContent = song;
-    songListElem.appendChild(li);
+  const page2Title = document.getElementById('page2-title');
+
+  function showSongs(category) {
+    songListElem.innerHTML = '';
+    const songs = songLists[category];
+    songs.forEach(song => {
+      const li = document.createElement('li');
+      li.textContent = song;
+      songListElem.appendChild(li);
+    });
+    // Başlığı güncelle
+    if(category === 'besa') page2Title.textContent = "Besa'nın Favori Şarkıları 🎶";
+    else if(category === 'klasik') page2Title.textContent = "Klasikler 🎼";
+    else if(category === 'yufus') page2Title.textContent = "Yufus’un Sevdikleri 🎧";
+  }
+
+  // Başlangıçta şarkı listesi boş
+  songListElem.innerHTML = '<p>Bir kategori seçiniz.</p>';
+
+  // Butonlara tıklama olayı
+  categoryButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      showSongs(btn.getAttribute('data-cat'));
+    });
   });
 
   // Anı defteri fonksiyonları
@@ -291,9 +401,18 @@
     memories.forEach((mem, index) => {
       const div = document.createElement('div');
       div.className = 'memory-item';
-      div.innerHTML = `<p>${mem.text.replace(/\n/g, "<br>")}</p>` +
+      div.innerHTML = `<button class="memory-delete-btn" data-index="${index}">×</button>
+                       <p>${mem.text.replace(/\n/g, "<br>")}</p>` +
                       (mem.photo ? `<img src="${mem.photo}" alt="Fotoğraf" />` : '');
       memoriesList.appendChild(div);
+    });
+
+    // Sil butonlarına event ekle
+    document.querySelectorAll('.memory-delete-btn').forEach(btn => {
+      btn.onclick = () => {
+        const idx = btn.getAttribute('data-index');
+        deleteMemory(idx);
+      };
     });
   }
 
@@ -325,8 +444,16 @@
     loadMemories();
   }
 
+  function deleteMemory(index) {
+    let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
+    memories.splice(index, 1);
+    localStorage.setItem('besaMemories', JSON.stringify(memories));
+    loadMemories();
+  }
+
   loadMemories();
 </script>
 
 </body>
 </html>
+
