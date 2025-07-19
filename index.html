@@ -16,7 +16,7 @@
   body {
     margin: 0; padding: 0;
     background-color: #000;
-    color: #f9a8d4;
+    color: #e6a8c4; /* biraz daha pastel pembe */
     font-family: 'Pacifico', cursive, Arial, sans-serif;
     overflow-x: hidden;
   }
@@ -31,16 +31,16 @@
   }
   h1 {
     font-size: 4.5rem;
-    color: #ec4899;
-    text-shadow: 0 0 15px #ec4899;
+    color: #d95ca0; /* pastel daha koyu */
+    text-shadow: 0 0 15px #d95ca0;
     margin-bottom: 0.3rem;
   }
   h2 {
     font-size: 3rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    color: #f472b6;
-    text-shadow: 0 0 8px #f472b6;
+    color: #e6a8c4;
+    text-shadow: 0 0 8px #e6a8c4;
   }
   p {
     font-size: 1.6rem;
@@ -53,11 +53,11 @@
     max-width: 380px;
     margin-left: auto;
     margin-right: auto;
-    color: #fabed4;
+    color: #f2c2d9;
   }
   button {
     margin-top: 2rem;
-    background: #ec4899;
+    background: #d95ca0;
     border: none;
     border-radius: 15px;
     color: black;
@@ -66,10 +66,10 @@
     padding: 0.7rem 2rem;
     cursor: pointer;
     transition: background 0.3s ease;
-    box-shadow: 0 0 10px #ec4899;
+    box-shadow: 0 0 10px #d95ca0;
   }
   button:hover {
-    background: #f472b6;
+    background: #e6a8c4;
   }
   /* Sayfa gizle/göster */
   .hidden {
@@ -81,7 +81,7 @@
     position: fixed;
     bottom: -25px;
     font-size: 1.7rem;
-    color: #ec4899;
+    color: #d95ca0;
     animation-name: floatUp;
     animation-timing-function: ease-out;
     animation-iteration-count: infinite;
@@ -100,7 +100,7 @@
 
   /* 2. sayfa düzeni */
   #page2 {
-    max-width: 650px;
+    max-width: 700px;
     margin: 0 auto;
   }
   ul.song-list {
@@ -109,14 +109,14 @@
     margin-top: 1rem;
   }
   ul.song-list li {
-    background: #f9a8d4;
+    background: #e6a8c4;
     color: #000;
     font-family: Arial, sans-serif;
     font-weight: bold;
     padding: 0.5rem 1rem;
     margin: 0.35rem 0;
     border-radius: 10px;
-    box-shadow: 0 0 8px #f9a8d4;
+    box-shadow: 0 0 8px #e6a8c4;
     cursor: default;
     user-select: none;
   }
@@ -127,14 +127,14 @@
     background: #261c2c;
     padding: 1rem 1.5rem;
     border-radius: 15px;
-    box-shadow: 0 0 15px #ec4899;
+    box-shadow: 0 0 15px #d95ca0;
     color: #f9a8d4;
     font-family: Arial, sans-serif;
   }
   #memory-section h3 {
     margin-top: 0;
     font-family: 'Pacifico', cursive;
-    color: #f472b6;
+    color: #e6a8c4;
   }
   #memory-section textarea {
     width: 100%;
@@ -151,7 +151,8 @@
   }
   #memory-section button {
     margin-top: 1rem;
-    background: #f472b6;
+    background: #e6a8c4;
+    color: black;
     width: 100%;
   }
   #memories-list {
@@ -161,17 +162,93 @@
     text-align: left;
   }
   .memory-item {
-    background: #f9a8d4;
+    background: #e6a8c4;
     color: #000;
     border-radius: 10px;
     padding: 0.5rem 1rem;
     margin-bottom: 0.8rem;
-    box-shadow: 0 0 10px #f9a8d4;
+    box-shadow: 0 0 10px #e6a8c4;
+    position: relative;
   }
   .memory-item img {
     max-width: 100%;
     border-radius: 10px;
     margin-top: 0.3rem;
+  }
+  .memory-delete-btn {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    background: #d95c7b;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 0 8px;
+    font-size: 1rem;
+  }
+  
+  /* Mini oyun stili */
+  #mini-game {
+    margin-top: 2rem;
+    background: #261c2c;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #d95ca0;
+    color: #e6a8c4;
+    font-family: Arial, sans-serif;
+  }
+  #mini-game h3 {
+    font-family: 'Pacifico', cursive;
+    margin-top: 0;
+  }
+  .choice-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .choice-box {
+    background: #e6a8c4;
+    color: black;
+    font-weight: bold;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 8px #e6a8c4;
+    cursor: pointer;
+    flex: 1 1 40%;
+    min-width: 140px;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  .choice-box:hover {
+    background: #d95ca0;
+    color: white;
+  }
+  #round-info {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+  }
+  #winner-message {
+    margin-top: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #f472b6;
+  }
+  #restart-btn {
+    margin-top: 1rem;
+    background: #d95ca0;
+    color: black;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px #d95ca0;
+  }
+  #restart-btn:hover {
+    background: #e6a8c4;
   }
 </style>
 
@@ -183,7 +260,8 @@
   <h1>Doğum Günün Kutlu Olsun 🥳</h1>
   <p>İyi ki doğdun Besa.</p>
   <p class="small-poem">
-    “”
+    “Bir gülüşün var, hayatıma bahar olur, <br>
+    Her anın seninle anlam bulur, dostum olur.”
   </p>
   <button id="btn-to-page2">Devam Et</button>
 </main>
@@ -191,10 +269,18 @@
 <!-- 2. Sayfa -->
 <main id="page2" class="hidden">
   <h2>Besa'nın Favori Şarkıları 🎶</h2>
-  <p>Bu listeyi birlikte seçtik, en sevdiğin şarkı hangisi bakalım!</p>
-  <ul class="song-list" id="song-list">
-    <!-- Şarkılar JS ile buraya gelecek -->
-  </ul>
+  <p>İki şarkıdan birini seç, sonunda favorin belli olacak!</p>
+
+  <div id="mini-game">
+    <h3>Mini Müzik Turnuvası</h3>
+    <div id="round-info"></div>
+    <div class="choice-container">
+      <div id="choice1" class="choice-box"></div>
+      <div id="choice2" class="choice-box"></div>
+    </div>
+    <div id="winner-message"></div>
+    <button id="restart-btn" class="hidden">Yeniden Başla</button>
+  </div>
 
   <!-- Anı defteri -->
   <section id="memory-section">
@@ -228,6 +314,7 @@
   document.getElementById('btn-to-page2').addEventListener('click', () => {
     page1.classList.add('hidden');
     page2.classList.remove('hidden');
+    startMiniGame();
   });
   document.getElementById('btn-to-page1').addEventListener('click', () => {
     page2.classList.add('hidden');
@@ -236,46 +323,100 @@
 
   // Besa'nın 32 favori şarkısı (listeden elenen 4 çıkarıldı)
   const besaSongs = [
-    "1. madrigal - seni dert etmeler",
-    "2. madrigal - ellerimde çiçekler",
-    "3. madrigal - kelebekler",
-    "4. son feci bisiklet - 80",
-    "5. son feci bisiklet - zaman yok",
-    "6. son feci bisiklet - 6patlar",
-    "7. adamlar - sarılırım birine",
-    "8. adamlar - rüyalarda buruşmuşum",
-    "9. adamlar - acının ilacı",
-    "10. pamela - istanbul",
-    "11. sufle - pus",
-    "12. kahraman deniz - son durağın",
-    "13. kahraman deniz - böyle sever",
-    "14. kalben - yara",
-    "15. sertab erener - bi polar",
-    "16. sertab erener - olsun",
-    "17. sezen aksu - biliyorsun",
-    "18. dedubluman - sana güvenmiyorum",
-    "19. ufuk beydemir - ay tenli kadın",
-    "20. mabel matiz - fırtınadayım",
-    "21. yüksek sadakat - fener",
-    "22. duman - ah",
-    "23. duman - senden daha güzel",
-    "24. duman - aman aman",
-    "25. duman - seni kendime sakladım",
-    "26. teoman - çoban yıldızı",
-    "27. teoman - kupa kızı ve sinek valesi",
-    "28. şebnem ferah - mayın tarlası",
-    "29. şebnem ferah - yalnız",
-    "30. model - mey",
-    "31. yüzyüzeyken konuşuruz - sandal",
-    "32. yüzyüzeyken konuşuruz - sen varsın diye"
+    "madrigal - seni dert etmeler",
+    "madrigal - ellerimde çiçekler",
+    "madrigal - kelebekler",
+    "son feci bisiklet - 80",
+    "son feci bisiklet - zaman yok",
+    "son feci bisiklet - 6patlar",
+    "adamlar - sarılırım birine",
+    "adamlar - rüyalarda buruşmuşum",
+    "adamlar - acının ilacı",
+    "pamela - istanbul",
+    "sufle - pus",
+    "kahraman deniz - son durağın",
+    "kahraman deniz - böyle sever",
+    "kalben - yara",
+    "sertab erener - bi polar",
+    "sertab erener - olsun",
+    "sezen aksu - biliyorsun",
+    "dedubluman - sana güvenmiyorum",
+    "ufuk beydemir - ay tenli kadın",
+    "mabel matiz - fırtınadayım",
+    "yüksek sadakat - fener",
+    "duman - ah",
+    "duman - senden daha güzel",
+    "duman - aman aman",
+    "duman - seni kendime sakladım",
+    "teoman - çoban yıldızı",
+    "teoman - kupa kızı ve sinek valesi",
+    "şebnem ferah - mayın tarlası",
+    "şebnem ferah - yalnız",
+    "model - mey",
+    "yüzyüzeyken konuşuruz - sandal",
+    "sen varsın diye"
   ];
 
-  const songListElem = document.getElementById('song-list');
-  besaSongs.forEach(song => {
-    const li = document.createElement('li');
-    li.textContent = song;
-    songListElem.appendChild(li);
-  });
+  // Mini oyun state
+  let gameSongs = [];
+  let round = 1;
+  let totalRounds = 0;
+
+  // Elements
+  const choice1 = document.getElementById('choice1');
+  const choice2 = document.getElementById('choice2');
+  const roundInfo = document.getElementById('round-info');
+  const winnerMessage = document.getElementById('winner-message');
+  const restartBtn = document.getElementById('restart-btn');
+
+  function startMiniGame() {
+    gameSongs = [...besaSongs];
+    round = 1;
+    totalRounds = gameSongs.length - 1;
+    winnerMessage.textContent = '';
+    restartBtn.classList.add('hidden');
+    roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
+    showNextChoices();
+  }
+
+  function showNextChoices() {
+    if (gameSongs.length === 1) {
+      // Oyun bitti
+      winnerMessage.textContent = `Favori şarkın: "${gameSongs[0]}" 🎉`;
+      choice1.style.display = 'none';
+      choice2.style.display = 'none';
+      roundInfo.textContent = '';
+      restartBtn.classList.remove('hidden');
+      return;
+    }
+    choice1.style.display = 'block';
+    choice2.style.display = 'block';
+
+    choice1.textContent = gameSongs[0];
+    choice2.textContent = gameSongs[1];
+  }
+
+  function chooseSong(chosenIndex) {
+    // Elenmeyen şarkıyı yeni diziye ekle
+    let newRoundSongs = [];
+    if (chosenIndex === 1) {
+      newRoundSongs.push(gameSongs[1]);
+    } else {
+      newRoundSongs.push(gameSongs[0]);
+    }
+    // Kalan şarkıları sona ekle
+    for(let i=2; i<gameSongs.length; i++) {
+      newRoundSongs.push(gameSongs[i]);
+    }
+    gameSongs = newRoundSongs;
+    round++;
+    roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
+    showNextChoices();
+  }
+
+  choice1.addEventListener('click', () => chooseSong(0));
+  choice2.addEventListener('click', () => chooseSong(1));
+  restartBtn.addEventListener('click', () => startMiniGame());
 
   // Anı defteri fonksiyonları
   const memoryText = document.getElementById('memory-text');
@@ -291,8 +432,17 @@
       const div = document.createElement('div');
       div.className = 'memory-item';
       div.innerHTML = `<p>${mem.text.replace(/\n/g, "<br>")}</p>` +
-                      (mem.photo ? `<img src="${mem.photo}" alt="Fotoğraf" />` : '');
+                      (mem.photo ? `<img src="${mem.photo}" alt="Fotoğraf" />` : '') +
+                      `<button class="memory-delete-btn" data-index="${index}">Sil</button>`;
       memoriesList.appendChild(div);
+    });
+
+    // Sil butonlarına event ekle
+    document.querySelectorAll('.memory-delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-index'));
+        deleteMemory(idx);
+      });
     });
   }
 
@@ -324,9 +474,15 @@
     loadMemories();
   }
 
+  function deleteMemory(index) {
+    let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
+    memories.splice(index,1);
+    localStorage.setItem('besaMemories', JSON.stringify(memories));
+    loadMemories();
+  }
+
   loadMemories();
 </script>
 
 </body>
 </html>
-
