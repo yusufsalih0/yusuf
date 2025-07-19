@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Besa'nın Doğum Günü</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', cursive;
+      background-color: black;
+      color: pink;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      margin-top: 100px;
+      font-size: 48px;
+      animation: bounce 2s ease infinite;
+    }
+
+    p {
+      font-size: 20px;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .button {
+      background-color: pink;
+      color: black;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 30px;
+    }
+
+    .hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart:before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart:after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -20px;
+        left: calc(100% * var(--i));
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        left: calc(100% * var(--i) + 50px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Doğum Günün Kutlu Olsun Besa 💖</h1>
+  <p>Seni tanımak büyük bir mutluluk... Bu sayfa sadece ikimize özel 🎈</p>
+  <button class="button" onclick="alert('Devamı yakında...')">Devam Et</button>
+
+  <div class="hearts">
+    <!-- Kalp animasyonları -->
+    <script>
+      const heartsContainer = document.querySelector('.hearts');
+      for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.setProperty('--i', Math.random());
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+        heartsContainer.appendChild(heart);
+      }
+    </script>
+  </div>
+</body>
+</html>
