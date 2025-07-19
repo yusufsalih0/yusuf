@@ -5,11 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Besa'nın Doğum Günü Kutlaması</title>
 
-<!-- Google Fonts: Pacifico (el yazısı) & Arial fallback -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-  /* Temel ayarlar */
   * {
     box-sizing: border-box;
   }
@@ -71,12 +69,10 @@
   button:hover {
     background: #f472b6;
   }
-  /* Sayfa gizle/göster */
   .hidden {
     display: none;
   }
 
-  /* Uçan kalpler animasyonu */
   .heart {
     position: fixed;
     bottom: -25px;
@@ -98,13 +94,10 @@
     }
   }
 
-  /* 2. sayfa düzeni */
   #page2 {
     max-width: 650px;
     margin: 0 auto;
   }
-
-  /* Kategori butonları */
   #category-buttons {
     display: flex;
     justify-content: center;
@@ -124,7 +117,7 @@
     list-style: none;
     padding: 0;
     margin-top: 1rem;
-    max-height: 350px;
+    max-height: 250px;
     overflow-y: auto;
   }
   ul.song-list li {
@@ -140,7 +133,27 @@
     user-select: none;
   }
 
-  /* Anı defteri alanı */
+  #duel-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  #duel-container button {
+    flex: 1;
+    font-size: 1.5rem;
+    background: #f472b6;
+    padding: 1rem;
+    border-radius: 15px;
+  }
+
+  #duel-result {
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ec4899;
+  }
+
   #memory-section {
     margin-top: 3rem;
     background: #261c2c;
@@ -242,6 +255,15 @@
     <!-- Şarkılar JS ile buraya gelecek -->
   </ul>
 
+  <button id="start-duel-btn" class="hidden">2'li Mücadeleyi Başlat</button>
+
+  <div id="duel-container" class="hidden">
+    <button id="duel-btn-left"></button>
+    <button id="duel-btn-right"></button>
+  </div>
+
+  <div id="duel-result"></div>
+
   <!-- Anı defteri -->
   <section id="memory-section">
     <h3>📝 Anı Defteri</h3>
@@ -256,7 +278,6 @@
 </main>
 
 <script>
-  // Kalp animasyonu
   for(let i=0; i<15; i++) {
     const heart = document.createElement('div');
     heart.textContent = '❤️';
@@ -268,7 +289,6 @@
     document.body.appendChild(heart);
   }
 
-  // Sayfa kontrol fonksiyonu
   const page1 = document.getElementById('page1');
   const page2 = document.getElementById('page2');
   document.getElementById('btn-to-page2').addEventListener('click', () => {
@@ -280,7 +300,6 @@
     page1.classList.remove('hidden');
   });
 
-  // Şarkı listeleri (isimler)
   const besaSongs = [
     "1. madrigal - seni dert etmeler",
     "2. madrigal - ellerimde çiçekler",
@@ -363,30 +382,100 @@
   const categoryButtons = document.querySelectorAll('#category-buttons button');
   const songListElem = document.getElementById('song-list');
   const page2Title = document.getElementById('page2-title');
+  const startDuelBtn = document.getElementById('start-duel-btn');
+  const duelContainer = document.getElementById('duel-container');
+  const duelBtnLeft = document.getElementById('duel-btn-left');
+  const duelBtnRight = document.getElementById('duel-btn-right');
+  const duelResult = document.getElementById('duel-result');
+
+  let currentCategory = null;
+  let duelSongs = [];
+  let duelIndex = 0;
+  let duelWinners = [];
 
   function showSongs(category) {
     songListElem.innerHTML = '';
+    duelContainer.classList.add('hidden');
+    duelResult.textContent = '';
+    startDuelBtn.classList.remove('hidden');
+
     const songs = songLists[category];
     songs.forEach(song => {
       const li = document.createElement('li');
       li.textContent = song;
       songListElem.appendChild(li);
     });
-    // Başlığı güncelle
+    currentCategory = category;
+
     if(category === 'besa') page2Title.textContent = "Besa'nın Favori Şarkıları 🎶";
     else if(category === 'klasik') page2Title.textContent = "Klasikler 🎼";
     else if(category === 'yufus') page2Title.textContent = "Yufus’un Sevdikleri 🎧";
   }
 
-  // Başlangıçta şarkı listesi boş
-  songListElem.innerHTML = '<p>Bir kategori seçiniz.</p>';
-
-  // Butonlara tıklama olayı
   categoryButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       showSongs(btn.getAttribute('data-cat'));
     });
   });
+
+  // Başlangıçta mesaj
+  songListElem.innerHTML = '<p>Bir kategori seçiniz.</p>';
+  startDuelBtn.classList.add('hidden');
+
+  // Turnuva başlatma
+  startDuelBtn.addEventListener('click', () => {
+    duelSongs = [...songLists[currentCategory]];
+    duelIndex = 0;
+    duelWinners = [];
+    startDuelBtn.classList.add('hidden');
+    songListElem.innerHTML = '';
+    duelResult.textContent = '';
+    duelContainer.classList.remove('hidden');
+    showNextDuel();
+  });
+
+  function showNextDuel() {
+    duelResult.textContent = '';
+    if (duelIndex >= duelSongs.length) {
+      if (duelWinners.length === 1) {
+        // Bitti
+        duelContainer.classList.add('hidden');
+        duelResult.textContent = `Favorin seçildi: "${duelWinners[0]}" 🎉`;
+      } else {
+        // Yeni tur başlat
+        duelSongs = duelWinners;
+        duelWinners = [];
+        duelIndex = 0;
+        showNextDuel();
+      }
+      return;
+    }
+
+    const leftSong = duelSongs[duelIndex];
+    const rightSong = duelSongs[duelIndex + 1];
+
+    // Eğer sağdaki yoksa (tek kaldıysa) doğrudan kazanan ilan et
+    if (!rightSong) {
+      duelWinners.push(leftSong);
+      duelIndex += 2;
+      showNextDuel();
+      return;
+    }
+
+    duelBtnLeft.textContent = leftSong;
+    duelBtnRight.textContent = rightSong;
+
+    duelBtnLeft.onclick = () => {
+      duelWinners.push(leftSong);
+      duelIndex += 2;
+      showNextDuel();
+    };
+    duelBtnRight.onclick = () => {
+      duelWinners.push(rightSong);
+      duelIndex += 2;
+      showNextDuel();
+    };
+  }
 
   // Anı defteri fonksiyonları
   const memoryText = document.getElementById('memory-text');
@@ -394,7 +483,6 @@
   const saveBtn = document.getElementById('save-memory-btn');
   const memoriesList = document.getElementById('memories-list');
 
-  // LocalStorage'dan anıları yükle
   function loadMemories() {
     memoriesList.innerHTML = '';
     let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
@@ -407,7 +495,6 @@
       memoriesList.appendChild(div);
     });
 
-    // Sil butonlarına event ekle
     document.querySelectorAll('.memory-delete-btn').forEach(btn => {
       btn.onclick = () => {
         const idx = btn.getAttribute('data-index');
@@ -416,7 +503,6 @@
     });
   }
 
-  // Yeni anı kaydet
   saveBtn.addEventListener('click', () => {
     let text = memoryText.value.trim();
     if (!text) {
@@ -456,4 +542,3 @@
 
 </body>
 </html>
-
