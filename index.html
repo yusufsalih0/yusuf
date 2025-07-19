@@ -1,622 +1,206 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Besa'nın Doğum Günü Kutlaması</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
-  body {
-    margin: 0; padding: 0;
-    background-color: #000;
-    color: #e6a8c4;
-    font-family: 'Pacifico', cursive, Arial, sans-serif;
-    overflow-x: hidden;
-  }
-  main {
-    min-height: 100vh;
-    padding: 1.5rem;
-    text-align: center;
-  }
-  h1 {
-    font-size: 4.5rem;
-    color: #d95ca0;
-    text-shadow: 0 0 15px #d95ca0;
-    margin-bottom: 0.3rem;
-  }
-  h2 {
-    font-size: 3rem;
-    margin: 1rem 0;
-    color: #e6a8c4;
-    text-shadow: 0 0 8px #e6a8c4;
-  }
-  p {
-    font-size: 1.6rem;
-    margin: 0.2rem 0;
-  }
-  .small-poem {
-    font-size: 1.4rem;
-    margin-top: 0.8rem;
-    font-style: italic;
-    max-width: 380px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #f2c2d9;
-  }
-  button, .btn-category {
-    margin-top: 1.3rem;
-    background: #d95ca0;
-    border: none;
-    border-radius: 15px;
-    color: black;
-    font-weight: bold;
-    font-size: 1.5rem;
-    padding: 0.7rem 2rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    box-shadow: 0 0 10px #d95ca0;
-  }
-  button:hover, .btn-category:hover {
-    background: #e6a8c4;
-  }
-  .hidden {
-    display: none;
-  }
-
-  .heart {
-    position: fixed;
-    bottom: -25px;
-    font-size: 1.7rem;
-    color: #d95ca0;
-    animation-name: floatUp;
-    animation-timing-function: ease-out;
-    animation-iteration-count: infinite;
-    user-select: none;
-  }
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0) scale(1);
-      opacity: 1;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Besa'nın Doğum Günü Web Sitesi</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #e1b0d6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 20px;
     }
-    100% {
-      transform: translateY(-270px) scale(0.5);
-      opacity: 0;
+    h1 {
+      margin-bottom: 8px;
+      color: #f06292;
+      font-family: 'Brush Script MT', cursive;
+      font-size: 2.8rem;
     }
-  }
-
-  /* Sayfa stilleri */
-  #page1, #page2 {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  /* Kategori butonları */
-  #category-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
-
-  /* Mini oyun */
-  #mini-game {
-    background: #261c2c;
-    padding: 1rem;
-    border-radius: 15px;
-    box-shadow: 0 0 15px #d95ca0;
-    color: #e6a8c4;
-    font-family: Arial, sans-serif;
-    margin-bottom: 1.7rem;
-  }
-  #mini-game h3 {
-    font-family: 'Pacifico', cursive;
-    margin-top: 0;
-  }
-  .choice-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1.5rem;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .choice-box {
-    background: #e6a8c4;
-    color: black;
-    font-weight: bold;
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: 0 0 8px #e6a8c4;
-    cursor: pointer;
-    flex: 1 1 40%;
-    min-width: 140px;
-    user-select: none;
-    transition: background 0.3s ease;
-  }
-  .choice-box:hover {
-    background: #d95ca0;
-    color: white;
-  }
-  #round-info {
-    margin-top: 1rem;
-    font-size: 1.3rem;
-  }
-  #winner-message {
-    margin-top: 1.5rem;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #f472b6;
-  }
-  #restart-btn {
-    margin-top: 1rem;
-    background: #d95ca0;
-    color: black;
-    font-weight: bold;
-    border-radius: 12px;
-    padding: 0.6rem 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 0 10px #d95ca0;
-  }
-  #restart-btn:hover {
-    background: #e6a8c4;
-  }
-
-  /* Anı defteri */
-  #memory-section {
-    background: #261c2c;
-    padding: 1rem 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 0 15px #d95ca0;
-    color: #f9a8d4;
-    font-family: Arial, sans-serif;
-    max-width: 700px;
-    margin: 1rem auto;
-  }
-  #memory-section h3 {
-    margin-top: 0;
-    font-family: 'Pacifico', cursive;
-    color: #e6a8c4;
-  }
-  #memory-section textarea {
-    width: 100%;
-    resize: vertical;
-    min-height: 80px;
-    border-radius: 10px;
-    border: none;
-    padding: 0.8rem;
-    font-size: 1.1rem;
-    font-family: Arial, sans-serif;
-  }
-  #memory-section input[type="file"] {
-    margin-top: 0.7rem;
-  }
-  #memory-section button {
-    margin-top: 1rem;
-    background: #e6a8c4;
-    color: black;
-    width: 100%;
-  }
-  #memories-list {
-    margin-top: 1rem;
-    max-height: 200px;
-    overflow-y: auto;
-    text-align: left;
-  }
-  .memory-item {
-    background: #e6a8c4;
-    color: #000;
-    border-radius: 10px;
-    padding: 0.5rem 1rem;
-    margin-bottom: 0.8rem;
-    box-shadow: 0 0 10px #e6a8c4;
-    position: relative;
-  }
-  .memory-item img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 0.3rem;
-  }
-  .memory-delete-btn {
-    position: absolute;
-    top: 6px;
-    right: 8px;
-    background: #d95c7b;
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    padding: 0 8px;
-    font-size: 1rem;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-  }
-  .memory-delete-btn:hover {
-    opacity: 1;
-  }
-
-  /* YouTube oynatıcı kutusu */
-  #yt-player {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    width: 280px;
-    height: 158px; /* 16:9 oranı */
-    border-radius: 12px;
-    box-shadow: 0 0 15px #d95ca0;
-    background: black;
-    overflow: hidden;
-    z-index: 1000;
-  }
-</style>
+    p.subtitle {
+      margin-top: 0;
+      margin-bottom: 30px;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: #f8bbd0;
+    }
+    button.category-btn {
+      background-color: #c65f92;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1.1rem;
+      padding: 15px 25px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button.category-btn:hover {
+      background-color: #e06cbf;
+    }
+    #game-area {
+      margin-top: 30px;
+      font-size: 1.1rem;
+      color: #f8bbd0;
+    }
+    ul.song-list {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 15px auto;
+      text-align: left;
+      color: #f8bbd0;
+    }
+    ul.song-list li {
+      margin: 6px 0;
+      padding: 5px 10px;
+      background-color: #380036;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    ul.song-list li:hover {
+      background-color: #601a4b;
+    }
+    audio {
+      margin-top: 15px;
+      outline: none;
+    }
+    #reset-btn {
+      margin-top: 20px;
+      background-color: #f48fb1;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #3c003c;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
+  <h1>Doğum Günün Kutlu Olsun Besa! 🎉</h1>
+  <p class="subtitle">İyi ki doğdun, seninle olmak güzel bir ayrıcalık.</p>
 
-<!-- 1. Sayfa -->
-<main id="page1">
-  <h1>Doğum Günün Kutlu Olsun 🥳</h1>
-  <p>İyi ki doğdun Besa.</p>
-  <p class="small-poem">
-    “Bir gülüşün var, hayatıma bahar olur,<br>
-    Her anın seninle anlam bulur, dostum olur.”
-  </p>
-  <button id="btn-to-page2">Devam Et</button>
-</main>
-
-<!-- 2. Sayfa -->
-<main id="page2" class="hidden">
-  <h2>Müzik Turnuvası 🎶</h2>
-
-  <!-- Kategori Seçimi -->
-  <div id="category-buttons">
-    <button class="btn-category" data-category="besa">💖 Besa'nın Favorileri</button>
-    <button class="btn-category" data-category="klasik">🎼 Klasikler</button>
-    <button class="btn-category" data-category="yufus">🎧 Yufus’un Sevdikleri</button>
+  <div>
+    <button class="category-btn" data-category="besa">💖 Besa'nın Favorileri</button>
+    <button class="category-btn" data-category="klasik">🎼 Klasikler</button>
+    <button class="category-btn" data-category="yufus">🎧 Yufus'un Sevdikleri</button>
   </div>
 
-  <!-- Mini Oyun Alanı -->
-  <div id="mini-game" class="hidden">
-    <h3 id="game-title"></h3>
-    <div id="round-info"></div>
-    <div class="choice-container">
-      <div id="choice1" class="choice-box"></div>
-      <div id="choice2" class="choice-box"></div>
-    </div>
-    <div id="winner-message"></div>
-    <button id="restart-btn" class="hidden">Yeniden Başla</button>
-  </div>
+  <div id="game-area"></div>
 
-  <!-- Anı Defteri Aç/Kapa Butonu -->
-  <button id="toggle-memory-btn">📝 Anı Defteri Aç/Kapa</button>
+  <script>
+    // Şarkı listeleri (YouTube embed video ID'leri ile)
+    const playlists = {
+      besa: [
+        { title: "Madrigal - Seni Dert Etmeler", youtubeId: "XXXXX1" },
+        { title: "Madrigal - Ellerimde Çiçekler", youtubeId: "XXXXX2" },
+        { title: "Son Feci Bisiklet - 80", youtubeId: "XXXXX3" },
+        { title: "Adamlar - Sarılırım Birine", youtubeId: "XXXXX4" },
+        { title: "Kalben - Yara", youtubeId: "XXXXX5" },
+        { title: "Şebnem Ferah - Mayın Tarlası", youtubeId: "XXXXX6" },
+        { title: "Duman - Ah", youtubeId: "XXXXX7" },
+        { title: "Teoman - Çoban Yıldızı", youtubeId: "XXXXX8" }
+      ],
+      klasik: [
+        { title: "Madrigal - Ellerimde Çiçekler", youtubeId: "XXXXX9" },
+        { title: "Sertab Erener - Bi Polar", youtubeId: "XXXXX10" },
+        { title: "Sezen Aksu - Biliyorsun", youtubeId: "XXXXX11" },
+        { title: "Duman - Senden Daha Güzel", youtubeId: "XXXXX12" },
+        { title: "Mor ve Ötesi - Küçük Sevgilim", youtubeId: "XXXXX13" },
+        { title: "Yüzyüzeyken Konuşuruz - Dinle Beni Bi", youtubeId: "XXXXX14" },
+        { title: "Yüzyüzeyken Konuşuruz - Ne Farkeder", youtubeId: "XXXXX15" },
+        { title: "Kalben - Yara", youtubeId: "XXXXX16" }
+      ],
+      yufus: [
+        { title: "Ezhel - İmkansızım", youtubeId: "XXXXX17" },
+        { title: "Kayra - Hikaye Bitti Çoktan", youtubeId: "XXXXX18" },
+        { title: "Anıl Piyancı - Bugün Biraz İçtim", youtubeId: "XXXXX19" },
+        { title: "Allame - Hayalin Yeri Yok", youtubeId: "XXXXX20" },
+        { title: "No 1 - Böyle İyi", youtubeId: "XXXXX21" },
+        { title: "Yener Çevik - Çocuk", youtubeId: "XXXXX22" },
+        { title: "Aspova - Eskimiş Senelere", youtubeId: "XXXXX23" },
+        { title: "Hidra - Karıncalar", youtubeId: "XXXXX24" }
+      ]
+    };
 
-  <!-- Anı Defteri -->
-  <section id="memory-section" class="hidden">
-    <h3>📝 Anı Defteri</h3>
-    <textarea id="memory-text" placeholder="Anını yaz..."></textarea>
-    <input type="file" id="memory-photo" accept="image/*" />
-    <button id="save-memory-btn">Kaydet</button>
+    // Sayfa elementleri
+    const gameArea = document.getElementById('game-area');
+    const buttons = document.querySelectorAll('.category-btn');
 
-    <div id="memories-list"></div>
-  </section>
-
-  <button id="btn-to-page1" style="margin-top:2rem;">Geri Dön</button>
-</main>
-
-<!-- YouTube Player -->
-<div id="yt-player" class="hidden">
-  <iframe id="yt-iframe" width="280" height="158" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-</div>
-
-<script>
-  // Kalp animasyonu
-  for(let i=0; i<15; i++) {
-    const heart = document.createElement('div');
-    heart.textContent = '❤️';
-    heart.className = 'heart';
-    heart.style.left = (i * 6 + 5) + '%';
-    heart.style.animationDuration = (5 + Math.random() * 3) + 's';
-    heart.style.animationDelay = (i * 0.3) + 's';
-    heart.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
-    document.body.appendChild(heart);
-  }
-
-  // Sayfa kontrol
-  const page1 = document.getElementById('page1');
-  const page2 = document.getElementById('page2');
-  document.getElementById('btn-to-page2').addEventListener('click', () => {
-    page1.classList.add('hidden');
-    page2.classList.remove('hidden');
-  });
-  document.getElementById('btn-to-page1').addEventListener('click', () => {
-    page2.classList.add('hidden');
-    page1.classList.remove('hidden');
-    resetGame();
-  });
-
-  // Şarkı listeleri (isim, youtube id)
-  const besaSongs = [
-    {name:"madrigal - seni dert etmeler", id:"Z9wA_NweA5c"},
-    {name:"madrigal - ellerimde çiçekler", id:"G4wTb5MjK_Y"},
-    {name:"madrigal - kelebekler", id:"pN9CYgYd1gk"},
-    {name:"son feci bisiklet - 80", id:"Km5ETLG9Nwo"},
-    {name:"son feci bisiklet - zaman yok", id:"dh_1LYfjfjE"},
-    {name:"son feci bisiklet - 6patlar", id:"hrF6LjvybfQ"},
-    {name:"adamlar - sarılırım birine", id:"RZb_7f7R49I"},
-    {name:"adamlar - rüyalarda buruşmuşum", id:"Q7y6ndSl1_0"},
-    {name:"adamlar - acının ilacı", id:"4Xb9HwY_9cg"},
-    {name:"pamela - istanbul", id:"q_X5xX1KhMI"},
-    {name:"sufle - pus", id:"jNeGx8v9Az0"},
-    {name:"kahraman deniz - son durağın", id:"UeZbQ69gEq4"},
-    {name:"kahraman deniz - böyle sever", id:"mwo_eN_2gEY"},
-    {name:"kalben - yara", id:"YrE_4jBqh6o"},
-    {name:"sertab erener - bi polar", id:"7_UEDWk3cwA"},
-    {name:"sertab erener - olsun", id:"0EVrUX4DzZQ"},
-    {name:"sezen aksu - biliyorsun", id:"7FfMg-JvPq8"},
-    {name:"dedubluman - sana güvenmiyorum", id:"yPuSmzYT6uY"},
-    {name:"ufuk beydemir - ay tenli kadın", id:"lTEZ2uPfZyI"},
-    {name:"mabel matiz - fırtınadayım", id:"xpAOliEuFtY"},
-    {name:"yüksek sadakat - fener", id:"u7LFw5hu0tA"},
-    {name:"duman - ah", id:"R3Hdnz8hWrg"},
-    {name:"duman - senden daha güzel", id:"Tz6jGr2RDNU"},
-    {name:"duman - aman aman", id:"a0Jb9CKr7Oc"},
-    {name:"duman - seni kendime sakladım", id:"0aMShH7M4r0"},
-    {name:"teoman - çoban yıldızı", id:"GshJ6PZ3M7Q"},
-    {name:"teoman - kupa kızı ve sinek valesi", id:"F3pxqV9kcLg"},
-    {name:"şebnem ferah - mayın tarlası", id:"mQXHJzDjAw4"},
-    {name:"şebnem ferah - yalnız", id:"U4EjC7DeQk0"},
-    {name:"model - mey", id:"yTN9PtHYR3A"},
-    {name:"yüzyüzeyken konuşuruz - sandal", id:"JsVH9DD-2Ds"},
-    {name:"sen varsın diye", id:"kq2aK1cpGv8"}
-  ];
-
-  const klasikSongs = [
-    {name:"eyedress - romantic lover", id:"AbwKjvOGz40"},
-    {name:"mild high club - homage", id:"8FFpeydP2cA"},
-    {name:"steve lacy - dark red", id:"5h9q5UY1Hrg"},
-    {name:"arctic monkeys - i wanna be yours", id:"OUQ1tqDbMfA"},
-    {name:"cigarettes after sex - apocalypse", id:"akN3l-Li-y0"},
-    {name:"cigarettes after sex - k.", id:"xD9mzBfJ-1Q"},
-    {name:"beach house - sex drugs etc.", id:"Rvp6IX5rAsM"},
-    {name:"little wolves - lost my mind", id:"zWqKz62KaYY"},
-    {name:"mac de marco - chamber of reflection", id:"0bGgXHQCEhQ"},
-    {name:"girl in red - we fell in love in october", id:"M90f1rhU4xQ"},
-    {name:"anathema - flying", id:"3zX9AgnX5Yw"},
-    {name:"cigarettes after sex - heavenly", id:"VE5CyYmROi0"},
-    {name:"guns n' roses - this i love", id:"_tXN8Jez_nI"},
-    {name:"arctic monkeys - 505", id:"qTq1i6jGxu0"},
-    {name:"yunus emre - imkansız bir aşk denir", id:"D8rJ1T-IyW0"},
-    {name:"avenged sevenfold - i won't see you tonight", id:"rKlqZV7Zg1k"}
-  ];
-
-  const yufusSongs = [
-    {name:"ezhel - imkansızsım", id:"8DjH6bKUPL8"},
-    {name:"ezhel - geceler", id:"ZRCU6TzMw9k"},
-    {name:"kayra - hikaye bitti çoktan", id:"lTshP5rsOaw"},
-    {name:"kayra - müneccim", id:"WpJhBqpyBqQ"},
-    {name:"kayra - kent orman müdavimleri", id:"XYRafO0UUCc"},
-    {name:"kayra - hayırsız evlat", id:"J0AXxZBq2Z8"},
-    {name:"kayra - merhumun çalıntı gölgesi", id:"m9k58XIl9RU"},
-    {name:"hidra - gibi", id:"GHeeExlxH-Y"},
-    {name:"hidra - karıncalar", id:"XvXHIms9EE0"},
-    {name:"kayra - bir günlük öldürün beni", id:"vH1Fc6azv5o"},
-    {name:"anıl piyancı - bugün biraz içtim", id:"4tNmU_VucwM"},
-    {name:"aspova - eskimiş senelere", id:"6HG5O8FFhxQ"},
-    {name:"allame - hayalin yeri yok", id:"PErKuDaW7xE"},
-    {name:"yener çevik - çocuk", id:"YuBnX2UjQuc"},
-    {name:"no 1 - böyle iyi", id:"a_YOoi9Z0B8"},
-    {name:"no 1 - olmasa da olur", id:"QuEZk92z5RQ"}
-  ];
-
-  let gameSongs = [];
-  let round = 1;
-  let totalRounds = 0;
-
-  const choice1 = document.getElementById('choice1');
-  const choice2 = document.getElementById('choice2');
-  const roundInfo = document.getElementById('round-info');
-  const winnerMessage = document.getElementById('winner-message');
-  const restartBtn = document.getElementById('restart-btn');
-  const miniGameDiv = document.getElementById('mini-game');
-  const gameTitle = document.getElementById('game-title');
-  const ytPlayerDiv = document.getElementById('yt-player');
-  const ytIframe = document.getElementById('yt-iframe');
-
-  function startMiniGame(category) {
-    switch(category) {
-      case 'besa': gameSongs = [...besaSongs]; gameTitle.textContent = "💖 Besa'nın Favorileri"; break;
-      case 'klasik': gameSongs = [...klasikSongs]; gameTitle.textContent = "🎼 Klasikler"; break;
-      case 'yufus': gameSongs = [...yufusSongs]; gameTitle.textContent = "🎧 Yufus’un Sevdikleri"; break;
-      default: gameSongs = []; break;
-    }
-    round = 1;
-    totalRounds = gameSongs.length - 1;
-    winnerMessage.textContent = '';
-    restartBtn.classList.add('hidden');
-    roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
-    miniGameDiv.classList.remove('hidden');
-    ytPlayerDiv.classList.remove('hidden');
-    showNextChoices();
-    playVideo(gameSongs[0].id);
-  }
-
-  function showNextChoices() {
-    if (gameSongs.length === 1) {
-      winnerMessage.textContent = `Favori şarkın: "${gameSongs[0].name}" 🎉`;
-      choice1.style.display = 'none';
-      choice2.style.display = 'none';
-      roundInfo.textContent = '';
-      restartBtn.classList.remove('hidden');
-      return;
-    }
-    choice1.style.display = 'block';
-    choice2.style.display = 'block';
-
-    choice1.textContent = gameSongs[0].name;
-    choice2.textContent = gameSongs[1].name;
-    // Videoyu ilk seçenekle başlat
-    playVideo(gameSongs[0].id);
-  }
-
-  function chooseSong(chosenIndex) {
-    let newRoundSongs = [];
-    if (chosenIndex === 1) {
-      newRoundSongs.push(gameSongs[1]);
-    } else {
-      newRoundSongs.push(gameSongs[0]);
-    }
-    for(let i=2; i<gameSongs.length; i++) {
-      newRoundSongs.push(gameSongs[i]);
-    }
-    gameSongs = newRoundSongs;
-    round++;
-    roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
-    showNextChoices();
-  }
-
-  choice1.addEventListener('click', () => {
-    chooseSong(0);
-    playVideo(gameSongs[0].id);
-  });
-  choice2.addEventListener('click', () => {
-    chooseSong(1);
-    playVideo(gameSongs[0].id);
-  });
-
-  restartBtn.addEventListener('click', () => {
-    miniGameDiv.classList.add('hidden');
-    ytPlayerDiv.classList.add('hidden');
-  });
-
-  function resetGame() {
-    gameSongs = [];
-    round = 1;
-    totalRounds = 0;
-    winnerMessage.textContent = '';
-    restartBtn.classList.add('hidden');
-    miniGameDiv.classList.add('hidden');
-    ytPlayerDiv.classList.add('hidden');
-  }
-
-  // YouTube oynatıcıyı güncelle
-  function playVideo(videoId) {
-    if(!videoId) {
-      ytIframe.src = "";
-      ytPlayerDiv.classList.add('hidden');
-      return;
-    }
-    ytPlayerDiv.classList.remove('hidden');
-    ytIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&controls=1`;
-  }
-
-  // Anı defteri aç/kapa
-  const memorySection = document.getElementById('memory-section');
-  const toggleMemoryBtn = document.getElementById('toggle-memory-btn');
-  toggleMemoryBtn.addEventListener('click', () => {
-    memorySection.classList.toggle('hidden');
-  });
-
-  // Anı defteri kaydet
-  const saveMemoryBtn = document.getElementById('save-memory-btn');
-  const memoriesList = document.getElementById('memories-list');
-  const memoryText = document.getElementById('memory-text');
-  const memoryPhoto = document.getElementById('memory-photo');
-
-  let memories = JSON.parse(localStorage.getItem('memories') || '[]');
-  function saveMemoriesToStorage() {
-    localStorage.setItem('memories', JSON.stringify(memories));
-  }
-  function renderMemories() {
-    memoriesList.innerHTML = '';
-    memories.forEach((m, idx) => {
-      const div = document.createElement('div');
-      div.className = 'memory-item';
-      div.innerHTML = `<button class="memory-delete-btn" data-index="${idx}">✕</button><p>${m.text.replace(/\n/g, "<br>")}</p>`;
-      if(m.photo) {
-        const img = document.createElement('img');
-        img.src = m.photo;
-        div.appendChild(img);
+    // Listeyi karıştırmak için fonksiyon
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
-      memoriesList.appendChild(div);
+      return array;
+    }
+
+    // Oyun başlatma fonksiyonu
+    function startGame(category) {
+      gameArea.innerHTML = `<h2>${category} listesinden rastgele bir şarkı seçin:</h2>`;
+
+      const songs = shuffle([...playlists[category]]);
+      let currentIndex = 0;
+
+      // Şarkı listesi göster
+      function showSongs() {
+        let listHtml = '<ul class="song-list">';
+        for (let i = currentIndex; i < Math.min(currentIndex + 4, songs.length); i++) {
+          listHtml += `<li data-index="${i}">${songs[i].title}</li>`;
+        }
+        listHtml += '</ul>';
+        gameArea.innerHTML += listHtml;
+      }
+
+      showSongs();
+
+      // Dinleme için YouTube iframe eklenecek
+      let playerFrame;
+
+      gameArea.addEventListener('click', (e) => {
+        if (e.target.tagName === 'LI') {
+          const index = Number(e.target.getAttribute('data-index'));
+          if (!isNaN(index)) {
+            currentIndex = index + 1;
+            const videoId = songs[index].youtubeId;
+
+            // YouTube iframe ekle
+            if (!playerFrame) {
+              playerFrame = document.createElement('iframe');
+              playerFrame.width = "320";
+              playerFrame.height = "180";
+              playerFrame.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+              playerFrame.allowFullscreen = true;
+              gameArea.appendChild(playerFrame);
+            }
+            playerFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+            if (currentIndex < songs.length) {
+              // Yeni liste göster
+              setTimeout(() => {
+                gameArea.querySelector('ul.song-list').remove();
+                showSongs();
+              }, 1500);
+            } else {
+              gameArea.innerHTML += "<p>En sevdiğin şarkıyı seçtin! 🎉</p>";
+            }
+          }
+        }
+      });
+    }
+
+    // Butonlara event ekle
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.getAttribute('data-category');
+        startGame(category);
+      });
     });
-    // silme tuşu event
-    document.querySelectorAll('.memory-delete-btn').forEach(btn => {
-      btn.onclick = () => {
-        memories.splice(btn.getAttribute('data-index'), 1);
-        saveMemoriesToStorage();
-        renderMemories();
-      }
-    });
-  }
-  renderMemories();
-
-  saveMemoryBtn.onclick = () => {
-    const text = memoryText.value.trim();
-    if(!text) {
-      alert("Anı boş olamaz.");
-      return;
-    }
-    if(memoryPhoto.files.length > 0) {
-      const file = memoryPhoto.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        memories.push({text: text, photo: reader.result});
-        saveMemoriesToStorage();
-        renderMemories();
-        memoryText.value = "";
-        memoryPhoto.value = "";
-      }
-      reader.readAsDataURL(file);
-    } else {
-      memories.push({text: text, photo: null});
-      saveMemoriesToStorage();
-      renderMemories();
-      memoryText.value = "";
-    }
-  };
-</script>
+  </script>
 </body>
 </html>
-// Karışık liste için shuffle fonksiyonu
-function shuffleArray(arr) {
-  for(let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-}
-
-// Kategori butonları tıklama eventleri
-const categoryButtons = document.querySelectorAll('.btn-category');
-categoryButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const category = button.getAttribute('data-category');
-    switch(category) {
-      case 'besa':
-        gameSongs = [...besaSongs];
-        gameTitle.textContent = "💖 Besa'nın Favorileri";
-        break;
-      case 'klasik':
-        gameSongs = [...klasikSongs];
-        gameTitle.textContent = "🎼 Klasikler";
-        break;
-      case 'yufus':
-        gameSongs = [...yufusSongs];
-        gameTitle.textContent = "🎧 Yufus’un Sevdikleri";
-        break;
-      default:
-        gameSongs = [];
-        gameTitle.textContent = "";
-        break;
-    }
-    shuffleArray(gameSongs); // Karıştır
-    round = 1;
-    totalRounds = gameSongs.length - 1;
-    winnerMessage.textContent = '';
-    restartBtn.classList.add('hidden');
-    roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
-    miniGameDiv.classList.remove('hidden');
-    ytPlayerDiv.classList.remove('hidden');
-    showNextChoices();
-    playVideo(gameSongs[0].id);
-  });
-});
