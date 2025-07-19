@@ -235,8 +235,7 @@
   <h1>Doğum Günün Kutlu Olsun 🥳</h1>
   <p>İyi ki doğdun Besa.</p>
   <p class="small-poem">
-    “Bir gülüşün var, hayatıma bahar olur, <br>
-    Her anın seninle anlam bulur, dostum olur.”
+    “Besa, bu özel gününde yanında olamasam da kalbim hep seninle. İyi ki varsın, iyi ki doğdun”
   </p>
   <button id="btn-to-page2">Devam Et</button>
 </main>
@@ -246,16 +245,16 @@
   <h2 id="page2-title">Şarkılar</h2>
 
   <div id="category-buttons">
-    <button data-cat="besa">Besa'nın Favorileri</button>
-    <button data-cat="klasik">Klasikler</button>
-    <button data-cat="yufus">Yufus’un Sevdikleri</button>
+    <button data-cat="besa">Senin tarzındakiler</button>
+    <button data-cat="klasik">Klasik müsikler</button>
+    <button data-cat="yufus">Benim tarzımdakiler</button>
   </div>
 
   <ul class="song-list" id="song-list">
     <!-- Şarkılar JS ile buraya gelecek -->
   </ul>
 
-  <button id="start-duel-btn" class="hidden">2'li Mücadeleyi Başlat</button>
+  <button id="start-duel-btn" class="hidden">ikisinden birini seç</button>
 
   <div id="duel-container" class="hidden">
     <button id="duel-btn-left"></button>
@@ -301,76 +300,76 @@
   });
 
   const besaSongs = [
-    "1. madrigal - seni dert etmeler",
-    "2. madrigal - ellerimde çiçekler",
-    "3. madrigal - kelebekler",
-    "4. son feci bisiklet - 80",
-    "5. son feci bisiklet - zaman yok",
-    "6. son feci bisiklet - 6patlar",
-    "7. adamlar - sarılırım birine",
-    "8. adamlar - rüyalarda buruşmuşum",
-    "9. adamlar - acının ilacı",
-    "10. pamela - istanbul",
-    "11. sufle - pus",
-    "12. kahraman deniz - son durağın",
-    "13. kahraman deniz - böyle sever",
-    "14. kalben - yara",
-    "15. sertab erener - bi polar",
-    "16. sertab erener - olsun",
-    "17. sezen aksu - biliyorsun",
-    "18. dedubluman - sana güvenmiyorum",
-    "19. ufuk beydemir - ay tenli kadın",
-    "20. mabel matiz - fırtınadayım",
-    "21. yüksek sadakat - fener",
-    "22. duman - ah",
-    "23. duman - senden daha güzel",
-    "24. duman - aman aman",
-    "25. duman - seni kendime sakladım",
-    "26. teoman - çoban yıldızı",
-    "27. teoman - kupa kızı ve sinek valesi",
-    "28. şebnem ferah - mayın tarlası",
-    "29. şebnem ferah - yalnız",
-    "30. model - mey",
-    "31. yüzyüzeyken konuşuruz - sandal",
-    "32. sen varsın diye"
+    "madrigal - seni dert etmeler",
+    "madrigal - ellerimde çiçekler",
+    "madrigal - kelebekler",
+    "son feci bisiklet - 80",
+    "son feci bisiklet - zaman yok",
+    "son feci bisiklet - 6patlar",
+    "adamlar - sarılırım birine",
+    "adamlar - rüyalarda buruşmuşum",
+    "adamlar - acının ilacı",
+    "pamela - istanbul",
+    "sufle - pus",
+    "kahraman deniz - son durağın",
+    "kahraman deniz - böyle sever",
+    "kalben - yara",
+    "sertab erener - bi polar",
+    "sertab erener - olsun",
+    "sezen aksu - biliyorsun",
+    "dedubluman - sana güvenmiyorum",
+    "ufuk beydemir - ay tenli kadın",
+    "mabel matiz - fırtınadayım",
+    "yüksek sadakat - fener",
+    "duman - ah",
+    "duman - senden daha güzel",
+    "duman - aman aman",
+    "duman - seni kendime sakladım",
+    "teoman - çoban yıldızı",
+    "teoman - kupa kızı ve sinek valesi",
+    "şebnem ferah - mayın tarlası",
+    "şebnem ferah - yalnız",
+    "model - mey",
+    "yüzyüzeyken konuşuruz - sandal",
+    "sen varsın diye"
   ];
 
   const klasikSongs = [
-    "1. eyedress - romantic lover",
-    "2. mild high club - homage",
-    "3. steve lacy - dark red",
-    "4. arctic monkeys - i wanna be yours",
-    "5. cigarettes after sex - apocalypse",
-    "6. cigarettes after sex - k.",
-    "7. beach house - sex drugs etc.",
-    "8. little wolves - lost my mind",
-    "9. mac demarco - chamber of reflection",
-    "10. girl in red - we fell in love in october",
-    "11. anathema - flying",
-    "12. cigarettes after sex - heavenly",
-    "13. guns n' roses - this i love",
-    "14. arctic monkeys - 505",
-    "15. yunus emre - imkansiz bir ask denir",
-    "16. avenged sevenfold - i won't see you tonight"
+    "eyedress - romantic lover",
+    "mild high club - homage",
+    "steve lacy - dark red",
+    "arctic monkeys - i wanna be yours",
+    "cigarettes after sex - apocalypse",
+    "cigarettes after sex - k.",
+    "beach house - sex drugs etc.",
+    "little wolves - lost my mind",
+    "mac demarco - chamber of reflection",
+    "girl in red - we fell in love in october",
+    "anathema - flying",
+    "cigarettes after sex - heavenly",
+    "guns n' roses - this i love",
+    "arctic monkeys - 505",
+    "yunus emre - imkansiz bir ask denir",
+    "avenged sevenfold - i won't see you tonight"
   ];
 
   const yufusSongs = [
-    "1. ezhel - imkansızım",
-    "2. ezhel - geceler",
-    "3. kayra - hikaye bitti çoktan",
-    "4. kayra - müneccim",
-    "5. kayra - kent orman müdavimleri",
-    "6. kayra - hayırsız evlat",
-    "7. kayra - merhumun çalıntı gölgesi",
-    "8. hidra - gibi",
-    "9. hidra - karıncalar",
-    "10. kayra - bir günlük öldürün beni",
-    "11. anıl piyancı - bugün biraz içtim",
-    "12. aspova - eskimiş senelere",
-    "13. allame - hayalin yeri yok",
-    "14. yener çevik - çocuk",
-    "15. no 1 - böyle iyi",
-    "16. no 1 - olmasa da olur"
+    "ezhel - imkansızım",
+    "ezhel - geceler",
+    "kayra - hikaye bitti çoktan",
+    "kayra - müneccim",
+    "kayra - kent orman müdavimleri",
+    "kayra - hayırsız evlat",
+    "kayra - merhumun çalıntı gölgesi",
+    "hidra - gibi",
+    "hidra - karıncalar",
+    "kayra - bir günlük öldürün beni",
+    "anıl piyancı - bugün biraz içtim",
+    "aspova - eskimiş senelere",
+    "allame - hayalin yeri yok",
+    "yener çevik - çocuk",
+    "no 1 - böyle iyi",
+    "no 1 - olmasa da olur"
   ];
 
   const songLists = {
