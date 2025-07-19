@@ -577,3 +577,46 @@
 </script>
 </body>
 </html>
+// Karışık liste için shuffle fonksiyonu
+function shuffleArray(arr) {
+  for(let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+// Kategori butonları tıklama eventleri
+const categoryButtons = document.querySelectorAll('.btn-category');
+categoryButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const category = button.getAttribute('data-category');
+    switch(category) {
+      case 'besa':
+        gameSongs = [...besaSongs];
+        gameTitle.textContent = "💖 Besa'nın Favorileri";
+        break;
+      case 'klasik':
+        gameSongs = [...klasikSongs];
+        gameTitle.textContent = "🎼 Klasikler";
+        break;
+      case 'yufus':
+        gameSongs = [...yufusSongs];
+        gameTitle.textContent = "🎧 Yufus’un Sevdikleri";
+        break;
+      default:
+        gameSongs = [];
+        gameTitle.textContent = "";
+        break;
+    }
+    shuffleArray(gameSongs); // Karıştır
+    round = 1;
+    totalRounds = gameSongs.length - 1;
+    winnerMessage.textContent = '';
+    restartBtn.classList.add('hidden');
+    roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
+    miniGameDiv.classList.remove('hidden');
+    ytPlayerDiv.classList.remove('hidden');
+    showNextChoices();
+    playVideo(gameSongs[0].id);
+  });
+});
