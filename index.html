@@ -4,30 +4,41 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Besa'nın Doğum Günü Kutlaması</title>
+
+<!-- Google Fonts: Pacifico (el yazısı) & Arial fallback -->
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
+  /* Temel ayarlar */
+  * {
+    box-sizing: border-box;
+  }
   body {
     margin: 0; padding: 0;
     background-color: #000;
-    color: #e6a8c4;
+    color: #e6a8c4; /* biraz daha pastel pembe */
     font-family: 'Pacifico', cursive, Arial, sans-serif;
     overflow-x: hidden;
   }
   main {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 1.5rem;
     text-align: center;
   }
   h1 {
     font-size: 4.5rem;
-    color: #d95ca0;
+    color: #d95ca0; /* pastel daha koyu */
     text-shadow: 0 0 15px #d95ca0;
     margin-bottom: 0.3rem;
   }
   h2 {
     font-size: 3rem;
-    margin: 1rem 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     color: #e6a8c4;
     text-shadow: 0 0 8px #e6a8c4;
   }
@@ -44,26 +55,28 @@
     margin-right: auto;
     color: #f2c2d9;
   }
-  button, .btn-category {
-    margin-top: 1.3rem;
+  button {
+    margin-top: 2rem;
     background: #d95ca0;
     border: none;
     border-radius: 15px;
     color: black;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     padding: 0.7rem 2rem;
     cursor: pointer;
     transition: background 0.3s ease;
     box-shadow: 0 0 10px #d95ca0;
   }
-  button:hover, .btn-category:hover {
+  button:hover {
     background: #e6a8c4;
   }
+  /* Sayfa gizle/göster */
   .hidden {
     display: none;
   }
 
+  /* Uçan kalpler animasyonu */
   .heart {
     position: fixed;
     bottom: -25px;
@@ -85,93 +98,38 @@
     }
   }
 
-  /* Sayfa stilleri */
-  #page1, #page2 {
+  /* 2. sayfa düzeni */
+  #page2 {
     max-width: 700px;
     margin: 0 auto;
   }
-
-  /* Kategori butonları */
-  #category-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
+  ul.song-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
   }
-
-  /* Mini oyun */
-  #mini-game {
-    background: #261c2c;
-    padding: 1rem;
-    border-radius: 15px;
-    box-shadow: 0 0 15px #d95ca0;
-    color: #e6a8c4;
+  ul.song-list li {
+    background: #e6a8c4;
+    color: #000;
     font-family: Arial, sans-serif;
-    margin-bottom: 1.7rem;
-  }
-  #mini-game h3 {
-    font-family: 'Pacifico', cursive;
-    margin-top: 0;
-  }
-  .choice-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 1.5rem;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .choice-box {
-    background: #e6a8c4;
-    color: black;
     font-weight: bold;
-    padding: 1rem;
-    border-radius: 12px;
+    padding: 0.5rem 1rem;
+    margin: 0.35rem 0;
+    border-radius: 10px;
     box-shadow: 0 0 8px #e6a8c4;
-    cursor: pointer;
-    flex: 1 1 40%;
-    min-width: 140px;
+    cursor: default;
     user-select: none;
-    transition: background 0.3s ease;
-  }
-  .choice-box:hover {
-    background: #d95ca0;
-    color: white;
-  }
-  #round-info {
-    margin-top: 1rem;
-    font-size: 1.3rem;
-  }
-  #winner-message {
-    margin-top: 1.5rem;
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #f472b6;
-  }
-  #restart-btn {
-    margin-top: 1rem;
-    background: #d95ca0;
-    color: black;
-    font-weight: bold;
-    border-radius: 12px;
-    padding: 0.6rem 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 0 10px #d95ca0;
-  }
-  #restart-btn:hover {
-    background: #e6a8c4;
   }
 
-  /* Anı defteri */
+  /* Anı defteri alanı */
   #memory-section {
+    margin-top: 3rem;
     background: #261c2c;
     padding: 1rem 1.5rem;
     border-radius: 15px;
     box-shadow: 0 0 15px #d95ca0;
     color: #f9a8d4;
     font-family: Arial, sans-serif;
-    max-width: 700px;
-    margin: 1rem auto;
   }
   #memory-section h3 {
     margin-top: 0;
@@ -229,13 +187,71 @@
     cursor: pointer;
     padding: 0 8px;
     font-size: 1rem;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
   }
-  .memory-delete-btn:hover {
-    opacity: 1;
+  
+  /* Mini oyun stili */
+  #mini-game {
+    margin-top: 2rem;
+    background: #261c2c;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #d95ca0;
+    color: #e6a8c4;
+    font-family: Arial, sans-serif;
+  }
+  #mini-game h3 {
+    font-family: 'Pacifico', cursive;
+    margin-top: 0;
+  }
+  .choice-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .choice-box {
+    background: #e6a8c4;
+    color: black;
+    font-weight: bold;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 8px #e6a8c4;
+    cursor: pointer;
+    flex: 1 1 40%;
+    min-width: 140px;
+    user-select: none;
+    transition: background 0.3s ease;
+  }
+  .choice-box:hover {
+    background: #d95ca0;
+    color: white;
+  }
+  #round-info {
+    margin-top: 1rem;
+    font-size: 1.3rem;
+  }
+  #winner-message {
+    margin-top: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #f472b6;
+  }
+  #restart-btn {
+    margin-top: 1rem;
+    background: #d95ca0;
+    color: black;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px #d95ca0;
+  }
+  #restart-btn:hover {
+    background: #e6a8c4;
   }
 </style>
+
 </head>
 <body>
 
@@ -252,18 +268,11 @@
 
 <!-- 2. Sayfa -->
 <main id="page2" class="hidden">
-  <h2>Müzik Turnuvası 🎶</h2>
+  <h2>Besa'nın Favori Şarkıları 🎶</h2>
+  <p>İki şarkıdan birini seç, sonunda favorin belli olacak!</p>
 
-  <!-- Kategori Seçimi -->
-  <div id="category-buttons">
-    <button class="btn-category" data-category="besa">💖 Besa'nın Favorileri</button>
-    <button class="btn-category" data-category="klasik">🎼 Klasikler</button>
-    <button class="btn-category" data-category="yufus">🎧 Yufus’un Sevdikleri</button>
-  </div>
-
-  <!-- Mini Oyun Alanı -->
-  <div id="mini-game" class="hidden">
-    <h3 id="game-title"></h3>
+  <div id="mini-game">
+    <h3>Mini Müzik Turnuvası</h3>
     <div id="round-info"></div>
     <div class="choice-container">
       <div id="choice1" class="choice-box"></div>
@@ -273,11 +282,8 @@
     <button id="restart-btn" class="hidden">Yeniden Başla</button>
   </div>
 
-  <!-- Anı Defteri Aç/Kapa Butonu -->
-  <button id="toggle-memory-btn">📝 Anı Defteri Aç/Kapa</button>
-
-  <!-- Anı Defteri -->
-  <section id="memory-section" class="hidden">
+  <!-- Anı defteri -->
+  <section id="memory-section">
     <h3>📝 Anı Defteri</h3>
     <textarea id="memory-text" placeholder="Anını yaz..."></textarea>
     <input type="file" id="memory-photo" accept="image/*" />
@@ -302,20 +308,20 @@
     document.body.appendChild(heart);
   }
 
-  // Sayfa kontrol
+  // Sayfa kontrol fonksiyonu
   const page1 = document.getElementById('page1');
   const page2 = document.getElementById('page2');
   document.getElementById('btn-to-page2').addEventListener('click', () => {
     page1.classList.add('hidden');
     page2.classList.remove('hidden');
+    startMiniGame();
   });
   document.getElementById('btn-to-page1').addEventListener('click', () => {
     page2.classList.add('hidden');
     page1.classList.remove('hidden');
-    resetGame();
   });
 
-  // Şarkı listeleri
+  // Besa'nın 32 favori şarkısı (listeden elenen 4 çıkarıldı)
   const besaSongs = [
     "madrigal - seni dert etmeler",
     "madrigal - ellerimde çiçekler",
@@ -351,44 +357,6 @@
     "sen varsın diye"
   ];
 
-  const klasikSongs = [
-    "eyedress - romantic lover",
-    "mild high club - homage",
-    "steve lacy - dark red",
-    "arctic monkeys - i wanna be yours",
-    "cigarettes after sex - apocalypse",
-    "cigarettes after sex - k.",
-    "beach house - sex drugs etc.",
-    "little wolves - lost my mind",
-    "mac de marco - chamber of reflection",
-    "girl in red - we fell in love in october",
-    "anathema - flying",
-    "cigarettes after sex - heavenly",
-    "guns n' roses - this i love",
-    "arctic monkeys - 505",
-    "yunus emre - imkansız bir aşk denir",
-    "avenged sevenfold - i won't see you tonight"
-  ];
-
-  const yufusSongs = [
-    "ezhel - imkansızsım",
-    "ezhel - geceler",
-    "kayra - hikaye bitti çoktan",
-    "kayra - müneccim",
-    "kayra - kent orman müdavimleri",
-    "kayra - hayırsız evlat",
-    "kayra - merhumun çalıntı gölgesi",
-    "hidra - gibi",
-    "hidra - karıncalar",
-    "kayra - bir günlük öldürün beni",
-    "anıl piyancı - bugün biraz içtim",
-    "aspova - eskimiş senelere",
-    "allame - hayalin yeri yok",
-    "yener çevik - çocuk",
-    "no 1 - böyle iyi",
-    "no 1 - olmasa da olur"
-  ];
-
   // Mini oyun state
   let gameSongs = [];
   let round = 1;
@@ -400,42 +368,20 @@
   const roundInfo = document.getElementById('round-info');
   const winnerMessage = document.getElementById('winner-message');
   const restartBtn = document.getElementById('restart-btn');
-  const miniGameDiv = document.getElementById('mini-game');
-  const gameTitle = document.getElementById('game-title');
 
-  // Başlangıçta mini oyun ve anı defteri gizli
-  miniGameDiv.classList.add('hidden');
-  const memorySection = document.getElementById('memory-section');
-  const toggleMemoryBtn = document.getElementById('toggle-memory-btn');
-  memorySection.classList.add('hidden');
-
-  // Kategori butonları
-  document.querySelectorAll('.btn-category').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = btn.getAttribute('data-category');
-      startMiniGame(cat);
-    });
-  });
-
-  // Mini oyun başlat
-  function startMiniGame(category) {
-    switch(category) {
-      case 'besa': gameSongs = [...besaSongs]; gameTitle.textContent = "💖 Besa'nın Favorileri"; break;
-      case 'klasik': gameSongs = [...klasikSongs]; gameTitle.textContent = "🎼 Klasikler"; break;
-      case 'yufus': gameSongs = [...yufusSongs]; gameTitle.textContent = "🎧 Yufus’un Sevdikleri"; break;
-      default: gameSongs = []; break;
-    }
+  function startMiniGame() {
+    gameSongs = [...besaSongs];
     round = 1;
     totalRounds = gameSongs.length - 1;
     winnerMessage.textContent = '';
     restartBtn.classList.add('hidden');
     roundInfo.textContent = `Tur ${round} / ${totalRounds}`;
-    miniGameDiv.classList.remove('hidden');
     showNextChoices();
   }
 
   function showNextChoices() {
     if (gameSongs.length === 1) {
+      // Oyun bitti
       winnerMessage.textContent = `Favori şarkın: "${gameSongs[0]}" 🎉`;
       choice1.style.display = 'none';
       choice2.style.display = 'none';
@@ -451,12 +397,14 @@
   }
 
   function chooseSong(chosenIndex) {
+    // Elenmeyen şarkıyı yeni diziye ekle
     let newRoundSongs = [];
     if (chosenIndex === 1) {
       newRoundSongs.push(gameSongs[1]);
     } else {
       newRoundSongs.push(gameSongs[0]);
     }
+    // Kalan şarkıları sona ekle
     for(let i=2; i<gameSongs.length; i++) {
       newRoundSongs.push(gameSongs[i]);
     }
@@ -466,4 +414,75 @@
     showNextChoices();
   }
 
-  choice1.addEventListener('click', () => chooseSong
+  choice1.addEventListener('click', () => chooseSong(0));
+  choice2.addEventListener('click', () => chooseSong(1));
+  restartBtn.addEventListener('click', () => startMiniGame());
+
+  // Anı defteri fonksiyonları
+  const memoryText = document.getElementById('memory-text');
+  const memoryPhoto = document.getElementById('memory-photo');
+  const saveBtn = document.getElementById('save-memory-btn');
+  const memoriesList = document.getElementById('memories-list');
+
+  // LocalStorage'dan anıları yükle
+  function loadMemories() {
+    memoriesList.innerHTML = '';
+    let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
+    memories.forEach((mem, index) => {
+      const div = document.createElement('div');
+      div.className = 'memory-item';
+      div.innerHTML = `<p>${mem.text.replace(/\n/g, "<br>")}</p>` +
+                      (mem.photo ? `<img src="${mem.photo}" alt="Fotoğraf" />` : '') +
+                      `<button class="memory-delete-btn" data-index="${index}">Sil</button>`;
+      memoriesList.appendChild(div);
+    });
+
+    // Sil butonlarına event ekle
+    document.querySelectorAll('.memory-delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.getAttribute('data-index'));
+        deleteMemory(idx);
+      });
+    });
+  }
+
+  // Yeni anı kaydet
+  saveBtn.addEventListener('click', () => {
+    let text = memoryText.value.trim();
+    if (!text) {
+      alert("Lütfen önce anınızı yazın.");
+      return;
+    }
+    if (memoryPhoto.files.length > 0) {
+      const file = memoryPhoto.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        saveMemoryToStorage(text, e.target.result);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      saveMemoryToStorage(text, null);
+    }
+  });
+
+  function saveMemoryToStorage(text, photoData) {
+    let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
+    memories.push({ text: text, photo: photoData });
+    localStorage.setItem('besaMemories', JSON.stringify(memories));
+    memoryText.value = '';
+    memoryPhoto.value = '';
+    loadMemories();
+  }
+
+  function deleteMemory(index) {
+    let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
+    memories.splice(index,1);
+    localStorage.setItem('besaMemories', JSON.stringify(memories));
+    loadMemories();
+  }
+
+  loadMemories();
+</script>
+
+</body>
+</html>
