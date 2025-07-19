@@ -1,310 +1,310 @@
-!DOCTYPE html
-html lang=tr
-head
-meta charset=UTF-8 
-meta name=viewport content=width=device-width, initial-scale=1 
-titleBesa'nın Doğum Günü Kutlamasıtitle
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Besa'nın Doğum Günü Kutlaması</title>
 
-!-- Google Fonts Pacifico (el yazısı) & Arial fallback --
-style
-  @import url('httpsfonts.googleapis.comcss2family=Pacifico&display=swap');
+<!-- Google Fonts: Pacifico (el yazısı) & Arial fallback -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-   Temel ayarlar 
-   {
-    box-sizing border-box;
+  /* Temel ayarlar */
+  * {
+    box-sizing: border-box;
   }
   body {
-    margin 0; padding 0;
-    background-color #000;
-    color #f9a8d4;
-    font-family 'Pacifico', cursive, Arial, sans-serif;
-    overflow-x hidden;
+    margin: 0; padding: 0;
+    background-color: #000;
+    color: #f9a8d4;
+    font-family: 'Pacifico', cursive, Arial, sans-serif;
+    overflow-x: hidden;
   }
   main {
-    min-height 100vh;
-    display flex;
-    flex-direction column;
-    justify-content center;
-    align-items center;
-    padding 1.5rem;
-    text-align center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
   }
   h1 {
-    font-size 4.5rem;
-    color #ec4899;
-    text-shadow 0 0 15px #ec4899;
-    margin-bottom 0.3rem;
+    font-size: 4.5rem;
+    color: #ec4899;
+    text-shadow: 0 0 15px #ec4899;
+    margin-bottom: 0.3rem;
   }
   h2 {
-    font-size 3rem;
-    margin-top 1rem;
-    margin-bottom 1rem;
-    color #f472b6;
-    text-shadow 0 0 8px #f472b6;
+    font-size: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #f472b6;
+    text-shadow: 0 0 8px #f472b6;
   }
   p {
-    font-size 1.6rem;
-    margin 0.2rem 0;
+    font-size: 1.6rem;
+    margin: 0.2rem 0;
   }
   .small-poem {
-    font-size 1.4rem;
-    margin-top 0.8rem;
-    font-style italic;
-    max-width 380px;
-    margin-left auto;
-    margin-right auto;
-    color #fabed4;
+    font-size: 1.4rem;
+    margin-top: 0.8rem;
+    font-style: italic;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fabed4;
   }
   button {
-    margin-top 2rem;
-    background #ec4899;
-    border none;
-    border-radius 15px;
-    color black;
-    font-weight bold;
-    font-size 1.7rem;
-    padding 0.7rem 2rem;
-    cursor pointer;
-    transition background 0.3s ease;
-    box-shadow 0 0 10px #ec4899;
+    margin-top: 2rem;
+    background: #ec4899;
+    border: none;
+    border-radius: 15px;
+    color: black;
+    font-weight: bold;
+    font-size: 1.7rem;
+    padding: 0.7rem 2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    box-shadow: 0 0 10px #ec4899;
   }
-  buttonhover {
-    background #f472b6;
+  button:hover {
+    background: #f472b6;
   }
-   Sayfa gizlegöster 
+  /* Sayfa gizle/göster */
   .hidden {
-    display none;
+    display: none;
   }
 
-   Uçan kalpler animasyonu 
+  /* Uçan kalpler animasyonu */
   .heart {
-    position fixed;
-    bottom -25px;
-    font-size 1.7rem;
-    color #ec4899;
-    animation-name floatUp;
-    animation-timing-function ease-out;
-    animation-iteration-count infinite;
-    user-select none;
+    position: fixed;
+    bottom: -25px;
+    font-size: 1.7rem;
+    color: #ec4899;
+    animation-name: floatUp;
+    animation-timing-function: ease-out;
+    animation-iteration-count: infinite;
+    user-select: none;
   }
   @keyframes floatUp {
     0% {
-      transform translateY(0) scale(1);
-      opacity 1;
+      transform: translateY(0) scale(1);
+      opacity: 1;
     }
     100% {
-      transform translateY(-270px) scale(0.5);
-      opacity 0;
+      transform: translateY(-270px) scale(0.5);
+      opacity: 0;
     }
   }
 
-   2. sayfa düzeni 
+  /* 2. sayfa düzeni */
   #page2 {
-    max-width 650px;
-    margin 0 auto;
+    max-width: 650px;
+    margin: 0 auto;
   }
   ul.song-list {
-    list-style none;
-    padding 0;
-    margin-top 1rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
   }
   ul.song-list li {
-    background #f9a8d4;
-    color #000;
-    font-family Arial, sans-serif;
-    font-weight bold;
-    padding 0.5rem 1rem;
-    margin 0.35rem 0;
-    border-radius 10px;
-    box-shadow 0 0 8px #f9a8d4;
-    cursor default;
-    user-select none;
+    background: #f9a8d4;
+    color: #000;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    margin: 0.35rem 0;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #f9a8d4;
+    cursor: default;
+    user-select: none;
   }
 
-   Anı defteri alanı 
+  /* Anı defteri alanı */
   #memory-section {
-    margin-top 3rem;
-    background #261c2c;
-    padding 1rem 1.5rem;
-    border-radius 15px;
-    box-shadow 0 0 15px #ec4899;
-    color #f9a8d4;
-    font-family Arial, sans-serif;
+    margin-top: 3rem;
+    background: #261c2c;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #ec4899;
+    color: #f9a8d4;
+    font-family: Arial, sans-serif;
   }
   #memory-section h3 {
-    margin-top 0;
-    font-family 'Pacifico', cursive;
-    color #f472b6;
+    margin-top: 0;
+    font-family: 'Pacifico', cursive;
+    color: #f472b6;
   }
   #memory-section textarea {
-    width 100%;
-    resize vertical;
-    min-height 80px;
-    border-radius 10px;
-    border none;
-    padding 0.8rem;
-    font-size 1.1rem;
-    font-family Arial, sans-serif;
+    width: 100%;
+    resize: vertical;
+    min-height: 80px;
+    border-radius: 10px;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1.1rem;
+    font-family: Arial, sans-serif;
   }
-  #memory-section input[type=file] {
-    margin-top 0.7rem;
+  #memory-section input[type="file"] {
+    margin-top: 0.7rem;
   }
   #memory-section button {
-    margin-top 1rem;
-    background #f472b6;
-    width 100%;
+    margin-top: 1rem;
+    background: #f472b6;
+    width: 100%;
   }
   #memories-list {
-    margin-top 1rem;
-    max-height 200px;
-    overflow-y auto;
-    text-align left;
+    margin-top: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
   }
   .memory-item {
-    background #f9a8d4;
-    color #000;
-    border-radius 10px;
-    padding 0.5rem 1rem;
-    margin-bottom 0.8rem;
-    box-shadow 0 0 10px #f9a8d4;
+    background: #f9a8d4;
+    color: #000;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 0 10px #f9a8d4;
   }
   .memory-item img {
-    max-width 100%;
-    border-radius 10px;
-    margin-top 0.3rem;
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 0.3rem;
   }
-style
+</style>
 
-head
-body
+</head>
+<body>
 
-!-- 1. Sayfa --
-main id=page1
-  h1Doğum Günün Kutlu Olsun 🥳h1
-  pİyi ki doğdun Besa.p
-  p class=small-poem
-    “Bir gülüşün var, hayatıma bahar olur, br
+<!-- 1. Sayfa -->
+<main id="page1">
+  <h1>Doğum Günün Kutlu Olsun 🥳</h1>
+  <p>İyi ki doğdun Besa.</p>
+  <p class="small-poem">
+    “Bir gülüşün var, hayatıma bahar olur, <br>
     Her anın seninle anlam bulur, dostum olur.”
-  p
-  button id=btn-to-page2Devam Etbutton
-main
+  </p>
+  <button id="btn-to-page2">Devam Et</button>
+</main>
 
-!-- 2. Sayfa --
-main id=page2 class=hidden
-  h2Besa'nın Favori Şarkıları 🎶h2
-  pBu listeyi birlikte seçtik, en sevdiğin şarkı hangisi bakalım!p
-  ul class=song-list id=song-list
-    !-- Şarkılar JS ile buraya gelecek --
-  ul
+<!-- 2. Sayfa -->
+<main id="page2" class="hidden">
+  <h2>Besa'nın Favori Şarkıları 🎶</h2>
+  <p>Bu listeyi birlikte seçtik, en sevdiğin şarkı hangisi bakalım!</p>
+  <ul class="song-list" id="song-list">
+    <!-- Şarkılar JS ile buraya gelecek -->
+  </ul>
 
-  !-- Anı defteri --
-  section id=memory-section
-    h3📝 Anı Defterih3
-    textarea id=memory-text placeholder=Anını yaz...textarea
-    input type=file id=memory-photo accept=image 
-    button id=save-memory-btnKaydetbutton
+  <!-- Anı defteri -->
+  <section id="memory-section">
+    <h3>📝 Anı Defteri</h3>
+    <textarea id="memory-text" placeholder="Anını yaz..."></textarea>
+    <input type="file" id="memory-photo" accept="image/*" />
+    <button id="save-memory-btn">Kaydet</button>
 
-    div id=memories-listdiv
-  section
+    <div id="memories-list"></div>
+  </section>
 
-  button id=btn-to-page1 style=margin-top2rem;Geri Dönbutton
-main
+  <button id="btn-to-page1" style="margin-top:2rem;">Geri Dön</button>
+</main>
 
-script
-   Kalp animasyonu
-  for(let i=0; i15; i++) {
+<script>
+  // Kalp animasyonu
+  for(let i=0; i<15; i++) {
     const heart = document.createElement('div');
     heart.textContent = '❤️';
     heart.className = 'heart';
-    heart.style.left = (i  6 + 5) + '%';
-    heart.style.animationDuration = (5 + Math.random()  3) + 's';
-    heart.style.animationDelay = (i  0.3) + 's';
-    heart.style.animationDirection = Math.random()  0.5  'normal'  'reverse';
+    heart.style.left = (i * 6 + 5) + '%';
+    heart.style.animationDuration = (5 + Math.random() * 3) + 's';
+    heart.style.animationDelay = (i * 0.3) + 's';
+    heart.style.animationDirection = Math.random() > 0.5 ? 'normal' : 'reverse';
     document.body.appendChild(heart);
   }
 
-   Sayfa kontrol fonksiyonu
+  // Sayfa kontrol fonksiyonu
   const page1 = document.getElementById('page1');
   const page2 = document.getElementById('page2');
-  document.getElementById('btn-to-page2').addEventListener('click', () = {
+  document.getElementById('btn-to-page2').addEventListener('click', () => {
     page1.classList.add('hidden');
     page2.classList.remove('hidden');
   });
-  document.getElementById('btn-to-page1').addEventListener('click', () = {
+  document.getElementById('btn-to-page1').addEventListener('click', () => {
     page2.classList.add('hidden');
     page1.classList.remove('hidden');
   });
 
-   Besa'nın 32 favori şarkısı (listeden elenen 4 çıkarıldı)
+  // Besa'nın 32 favori şarkısı (listeden elenen 4 çıkarıldı)
   const besaSongs = [
-    1. madrigal - seni dert etmeler,
-    2. madrigal - ellerimde çiçekler,
-    3. madrigal - kelebekler,
-    4. son feci bisiklet - 80,
-    5. son feci bisiklet - zaman yok,
-    6. son feci bisiklet - 6patlar,
-    7. adamlar - sarılırım birine,
-    8. adamlar - rüyalarda buruşmuşum,
-    9. adamlar - acının ilacı,
-    10. pamela - istanbul,
-    11. sufle - pus,
-    12. kahraman deniz - son durağın,
-    13. kahraman deniz - böyle sever,
-    14. kalben - yara,
-    15. sertab erener - bi polar,
-    16. sertab erener - olsun,
-    17. sezen aksu - biliyorsun,
-    18. dedubluman - sana güvenmiyorum,
-    19. ufuk beydemir - ay tenli kadın,
-    20. mabel matiz - fırtınadayım,
-    21. yüksek sadakat - fener,
-    22. duman - ah,
-    23. duman - senden daha güzel,
-    24. duman - aman aman,
-    25. duman - seni kendime sakladım,
-    26. teoman - çoban yıldızı,
-    27. teoman - kupa kızı ve sinek valesi,
-    28. şebnem ferah - mayın tarlası,
-    29. şebnem ferah - yalnız,
-    30. model - mey,
-    31. yüzyüzeyken konuşuruz - sandal,
-    32. sen varsın diye
+    "1. madrigal - seni dert etmeler",
+    "2. madrigal - ellerimde çiçekler",
+    "3. madrigal - kelebekler",
+    "4. son feci bisiklet - 80",
+    "5. son feci bisiklet - zaman yok",
+    "6. son feci bisiklet - 6patlar",
+    "7. adamlar - sarılırım birine",
+    "8. adamlar - rüyalarda buruşmuşum",
+    "9. adamlar - acının ilacı",
+    "10. pamela - istanbul",
+    "11. sufle - pus",
+    "12. kahraman deniz - son durağın",
+    "13. kahraman deniz - böyle sever",
+    "14. kalben - yara",
+    "15. sertab erener - bi polar",
+    "16. sertab erener - olsun",
+    "17. sezen aksu - biliyorsun",
+    "18. dedubluman - sana güvenmiyorum",
+    "19. ufuk beydemir - ay tenli kadın",
+    "20. mabel matiz - fırtınadayım",
+    "21. yüksek sadakat - fener",
+    "22. duman - ah",
+    "23. duman - senden daha güzel",
+    "24. duman - aman aman",
+    "25. duman - seni kendime sakladım",
+    "26. teoman - çoban yıldızı",
+    "27. teoman - kupa kızı ve sinek valesi",
+    "28. şebnem ferah - mayın tarlası",
+    "29. şebnem ferah - yalnız",
+    "30. model - mey",
+    "31. yüzyüzeyken konuşuruz - sandal",
+    "32. sen varsın diye"
   ];
 
   const songListElem = document.getElementById('song-list');
-  besaSongs.forEach(song = {
+  besaSongs.forEach(song => {
     const li = document.createElement('li');
     li.textContent = song;
     songListElem.appendChild(li);
   });
 
-   Anı defteri fonksiyonları
+  // Anı defteri fonksiyonları
   const memoryText = document.getElementById('memory-text');
   const memoryPhoto = document.getElementById('memory-photo');
   const saveBtn = document.getElementById('save-memory-btn');
   const memoriesList = document.getElementById('memories-list');
 
-   LocalStorage'dan anıları yükle
+  // LocalStorage'dan anıları yükle
   function loadMemories() {
     memoriesList.innerHTML = '';
-    let memories = JSON.parse(localStorage.getItem('besaMemories')  '[]');
-    memories.forEach((mem, index) = {
+    let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
+    memories.forEach((mem, index) => {
       const div = document.createElement('div');
       div.className = 'memory-item';
-      div.innerHTML = `p${mem.text.replace(ng, br)}p` +
-                      (mem.photo  `img src=${mem.photo} alt=Fotoğraf `  '');
+      div.innerHTML = `<p>${mem.text.replace(/\n/g, "<br>")}</p>` +
+                      (mem.photo ? `<img src="${mem.photo}" alt="Fotoğraf" />` : '');
       memoriesList.appendChild(div);
     });
   }
 
-   Yeni anı kaydet
-  saveBtn.addEventListener('click', () = {
+  // Yeni anı kaydet
+  saveBtn.addEventListener('click', () => {
     let text = memoryText.value.trim();
     if (!text) {
-      alert(Lütfen önce anınızı yazın.);
+      alert("Lütfen önce anınızı yazın.");
       return;
     }
-    if (memoryPhoto.files.length  0) {
+    if (memoryPhoto.files.length > 0) {
       const file = memoryPhoto.files[0];
       const reader = new FileReader();
       reader.onload = function(e) {
@@ -317,8 +317,8 @@ script
   });
 
   function saveMemoryToStorage(text, photoData) {
-    let memories = JSON.parse(localStorage.getItem('besaMemories')  '[]');
-    memories.push({ text text, photo photoData });
+    let memories = JSON.parse(localStorage.getItem('besaMemories') || '[]');
+    memories.push({ text: text, photo: photoData });
     localStorage.setItem('besaMemories', JSON.stringify(memories));
     memoryText.value = '';
     memoryPhoto.value = '';
@@ -326,7 +326,8 @@ script
   }
 
   loadMemories();
-script
+</script>
 
-body
-html
+</body>
+</html>
+
